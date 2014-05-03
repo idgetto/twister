@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# Call me from the project root directory
 
 project_name=${PWD##*/}
 
