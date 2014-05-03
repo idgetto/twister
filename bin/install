@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+project_name=${PWD##*/}
+
+ant debug
+adb install -dr bin/${project_name}-debug.apk
