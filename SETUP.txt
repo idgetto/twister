@@ -1,0 +1,18 @@
+Command Line Instructions:
+
+
+Setup:
+
+  Make sure the android tools/ and platform-tools/ directrories are in your path.
+
+  PATH=$PATH:/path/to/android-sdks/tools:/path/to/android-sdks/platform-tools
+
+Generate .apk:
+
+  run `ant debug`
+
+  This will generate an .apk (<project-name>-debug.apk) in the project's bin directory.
+
+Install .apk on real device:
+
+  run `adb -d install foo.apk
