@@ -4,5 +4,5 @@ bin/*.dex*
 bin/build.prop
 .idea/
 local.properties
-*.class
+**/*.class
 gen/
