@@ -3,5 +3,4 @@ bin/*.ap_*
 bin/*.dex*
 bin/build.prop
 .idea/
-project.properties
 local.properties
