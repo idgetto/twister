@@ -10,7 +10,7 @@ public class GameActivity extends Activity {
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.GameActivity);
+        setContentView(R.layout.game_activity);
     }
 
 }
