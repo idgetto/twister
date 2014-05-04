@@ -1,7 +1,5 @@
-bin/*.apk*
-bin/*.ap_*
-bin/*.dex*
-bin/build.prop
+!bin/install
+bin/
 .idea/
 local.properties
 **/*.class
