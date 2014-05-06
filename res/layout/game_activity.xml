@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     >
 
+  <com.moonshine.twister.MoveView android:id="@+id/move_view"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+    />
+
+  <com.moonshine.twister.BoardView android:id="@+id/board_view"
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+    />
+
   <TextView
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:text="Hello World, GameActivity"
-      android:id="@+id/textView" />
+      android:id="@+id/text_view" />
 
 </RelativeLayout>

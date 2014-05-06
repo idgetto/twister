@@ -19,18 +19,22 @@ public class Circle {
                                             // R.drawable.red_glow_circle
                                           };
 
-  private int colorIndex;
+  private Color color;
   private int imageId;
   private Finger finger;
   private Context context;
 
-  public Circle(int colorIndex, Finger finger, Context context) {
+  public Circle(Color color, Finger finger, Context context) {
 
-    this.colorIndex = colorIndex;
-    this.imageId = images[colorIndex];
+    this.color = color;
+    this.imageId = images[color.getId()];
     this.finger = finger;
     this.context = context;
 
+  }
+
+  public void setColor(Color color) {
+    this.color = color;
   }
 
   public int getImageId() {
@@ -38,12 +42,12 @@ public class Circle {
   }
 
   public void glow() {
-    this.imageId = glowImages[colorIndex];
+    this.imageId = glowImages[color.getId()];
   }
 
   // reverse of glow
   public void fade() {
-    this.imageId = images[colorIndex];
+    this.imageId = images[color.getId()];
   }
 
 }

@@ -3,6 +3,11 @@ package com.moonshine.twister;
 import android.os.Bundle;
 import android.app.Activity;
 import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.view.View;
+import android.widget.Toast;
+import android.content.Context;
 
 public class GameActivity extends Activity {
 
@@ -20,19 +25,20 @@ public class GameActivity extends Activity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.game_activity);
 
-      // boardView = (BoardView) findViewById(R.id.board_view);
-      // moveView  = (MoveView)  findViewById(R.id.move_view);
-      // textView  = (TextView)  findViewById(R.id.text_view);
+      boardView = (BoardView) findViewById(R.id.board_view);
+      moveView  = (MoveView)  findViewById(R.id.move_view);
+      textView  = (TextView)  findViewById(R.id.text_view);
 
-      // boardView.setAdapter(new BoardAdapter(this));
+      boardView.setAdapter(new BoardAdapter(this));
 
-      // boardView.setOnItemClickListener(new OnItemClickListener() {
+      final Context context = this;
+      boardView.setOnItemClickListener(new OnItemClickListener() {
 
-        // public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-        //   Toast.makeText(HelloGridView.this, "" + position, Toast.LENGTH_SHORT).show();
-        // }
+        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+          Toast.makeText(context, "" + position, Toast.LENGTH_SHORT).show();
+        }
 
-      // });
+      });
 
       playerOne = new Player();
       playerTwo = new Player();
