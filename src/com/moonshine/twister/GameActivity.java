@@ -6,9 +6,9 @@ import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
-  private BoardView mBoardView;
-  private MoveView mMoveView;
-  private TextView mTextView;
+  private BoardView boardView;
+  private MoveView moveView;
+  private TextView textView;
 
   private Player currentPlayer;
   private Player playerOne;
@@ -20,13 +20,13 @@ public class GameActivity extends Activity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.game_activity);
 
-      // mBoardView = (BoardView) findViewById(R.id.board_view);
-      // mMoveView  = (MoveView)  findViewById(R.id.move_view);
-      // mTextView  = (TextView)  findViewById(R.id.text_view);
+      // boardView = (BoardView) findViewById(R.id.board_view);
+      // moveView  = (MoveView)  findViewById(R.id.move_view);
+      // textView  = (TextView)  findViewById(R.id.text_view);
 
-      // mBoardView.setAdapter(new BoardAdapter(this));
+      // boardView.setAdapter(new BoardAdapter(this));
 
-      // mBoardView.setOnItemClickListener(new OnItemClickListener() {
+      // boardView.setOnItemClickListener(new OnItemClickListener() {
 
         // public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
         //   Toast.makeText(HelloGridView.this, "" + position, Toast.LENGTH_SHORT).show();

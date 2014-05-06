@@ -12,17 +12,17 @@ public class BoardAdapter extends BaseAdapter {
 	private final int ROWS = 6;
 	private final int COLS = 4;
 
-	private Context mContext;
+	private Context context;
 	private Circle[] circles;
 
 	public BoardAdapter(Context context) {
 
-		mContext = context;
+		context = context;
         circles = new Circle[ROWS * COLS];
 
         for (int i = 0; i < circles.length; i++) {
             int colorIndex = i % COLS;
-            circles[i] = new Circle(colorIndex, Finger.NONE, mContext);
+            circles[i] = new Circle(colorIndex, Finger.NONE, context);
         }
 
 	}
@@ -43,7 +43,7 @@ public class BoardAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
-            imageView = new ImageView(mContext);
+            imageView = new ImageView(context);
             imageView.setLayoutParams(new GridView.LayoutParams(85, 85));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setPadding(8, 8, 8, 8);
