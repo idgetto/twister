@@ -1,6 +1,6 @@
 package com.moonshine.twister;
 
-public class CircleAdapter extends BaseAdapter {
+public class BoardAdapter extends BaseAdapter {
 
 	private final ROWS = 6;
 	private final COLS = 4;
@@ -15,7 +15,7 @@ public class CircleAdapter extends BaseAdapter {
 	private Circle[] circles;
 
 
-	public CircleAdapter(Context context) {
+	public BoardAdapter(Context context) {
 
 		mContext = context;
         circles = new Circle[ROWS * COLS];
@@ -23,7 +23,7 @@ public class CircleAdapter extends BaseAdapter {
 
         for (int i = 0; i < circles.length; i++) {
             int imageId = circleImgs[i % 4];
-            circles[i] = new Circle(imageId);
+            circles[i] = new Circle(imageId, Finger.NONE, this);
         }
 
 	}

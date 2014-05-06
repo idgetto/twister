@@ -25,7 +25,7 @@ public class GameActivity extends Activity {
       mMoveView  = (MoveView)  findViewById(R.id.move_view);
       mTextView  = (TextView)  findViewById(R.id.text_view);
 
-      mBoardView.setAdapter(new CircleAdapter(this));
+      mBoardView.setAdapter(new BoardAdapter(this));
 
       mBoardView.setOnItemClickListener(new OnItemClickListener() {
 
