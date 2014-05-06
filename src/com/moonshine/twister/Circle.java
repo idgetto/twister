@@ -1,28 +1,49 @@
 package com.moonshine.twister;
 
+import android.content.Context;
+
 public class Circle {
 
-  private final String TYPE = "drawable";
+  // TODO: add images
+  private static final int[] images = {
+                                        // R.drawable.green_circle,
+                                        // R.drawable.yellow_circle,
+                                        // R.drawable.blue_circle,
+                                        // R.drawable.red_circle
+                                      };
 
+  private static final int[] glowImages = {
+                                            // R.drawable.green_glow_circle,
+                                            // R.drawable.yellow_glow_circle,
+                                            // R.drawable.blue_glow_circle,
+                                            // R.drawable.red_glow_circle
+                                          };
+
+  private int colorIndex;
   private int imageId;
   private Finger finger;
   private Context context;
 
-  public Circle(int imageId, Finger finger, Context context) {
+  public Circle(int colorIndex, Finger finger, Context context) {
 
-    this.imageId = imageId;
-    this.finger = finger
+    this.colorIndex = colorIndex;
+    this.imageId = images[colorIndex];
+    this.finger = finger;
     this.context = context;
 
   }
 
+  public int getImageId() {
+    return imageId;
+  }
+
   public void glow() {
-    Resources resources = context.getResources()
+    this.imageId = glowImages[colorIndex];
+  }
 
-    String name = resources.getResourceName(imageId);
-    name += "_glow";
-
-    imageId = resources.getIdentifier(name, TYPE, getPackageName())
+  // reverse of glow
+  public void fade() {
+    this.imageId = images[colorIndex];
   }
 
 }

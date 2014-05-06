@@ -1,29 +1,28 @@
 package com.moonshine.twister;
 
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.view.View;
+import android.content.Context;
+
 public class BoardAdapter extends BaseAdapter {
 
-	private final ROWS = 6;
-	private final COLS = 4;
-
-    TODO: add circle images
-    private final int[] circleImgs = {  R.drawable.green_circle,
-                                        R.drawable.yellow_circle,
-                                        R.drawable.blue_circle,
-                                        R.drawable.red_circle }
+	private final int ROWS = 6;
+	private final int COLS = 4;
 
 	private Context mContext;
 	private Circle[] circles;
-
 
 	public BoardAdapter(Context context) {
 
 		mContext = context;
         circles = new Circle[ROWS * COLS];
-        circleImgs =
 
         for (int i = 0; i < circles.length; i++) {
-            int imageId = circleImgs[i % 4];
-            circles[i] = new Circle(imageId, Finger.NONE, this);
+            int colorIndex = i % COLS;
+            circles[i] = new Circle(colorIndex, Finger.NONE, mContext);
         }
 
 	}
@@ -34,6 +33,10 @@ public class BoardAdapter extends BaseAdapter {
 
     public Circle getItem(int position) {
         return circles[position];
+    }
+
+    public long getItemId(int position) {
+        return 0;
     }
 
     // create a new ImageView for each item referenced by the Adapter
