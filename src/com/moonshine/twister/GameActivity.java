@@ -4,10 +4,13 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.widget.TextView;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.view.View;
+import android.view.View.OnTouchListener;
 import android.widget.Toast;
 import android.content.Context;
+import android.view.MotionEvent;
+import static android.view.MotionEvent.*;
+import android.widget.GridView;
 
 public class GameActivity extends Activity {
 
@@ -29,23 +32,39 @@ public class GameActivity extends Activity {
       moveView  = (GridView)  findViewById(R.id.move_view);
       textView  = (TextView)  findViewById(R.id.text_view);
 
-      boardView.setAdapter(new BoardAdapter(this));
-
-      final Context context = this;
-      // onTouchListener?
-      boardView.setOnClickListener(new OnClickListener() {
-
-        public void onClick(AdapterView<?> parent, View v, int position, long id) {
-          Circle circle = (Circle) parent.getItemAtPosition(position);
-          circle.setPlayer(currentPlayer);
-          circle.setFinger()
-        }
-
-      });
-
       playerOne = new Player();
       playerTwo = new Player();
       currentPlayer = playerOne;
+
+      boardView.setAdapter(new BoardAdapter(this));
+
+      boardView.setOnTouchListener(new OnTouchListener() {
+
+        public boolean onTouch(View v, MotionEvent event) {
+
+          int eventX = (int) event.getX();
+          int eventY = (int) event.getY();
+          int index = boardView.pointToPosition(eventX, eventY);
+          Circle circle = (Circle) boardView.getItemAtPosition(index);
+
+          switch (event.getAction()) {
+
+            case ACTION_DOWN:
+              // circle.setPlayer(currentPlayer);
+              // circle.setFinger(Finger.INDEX);
+              break;
+
+            case ACTION_UP:
+
+              break;
+
+          }
+
+          return true;
+
+        }
+
+      });
 
     }
 
