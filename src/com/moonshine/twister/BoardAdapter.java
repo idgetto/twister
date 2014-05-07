@@ -17,28 +17,28 @@ public class BoardAdapter extends BaseAdapter {
 
 	public BoardAdapter(Context context) {
 
-		context = context;
+		this.context = context;
     circles = new Circle[ROWS * COLS];
 
     for (int i = 0; i < circles.length; i += 4) {
-        circles[i]     = new Circle(Color.GREEN, Finger.NONE, context);
-        circles[i + 1] = new Circle(Color.YELLOW, Finger.NONE, context);
-        circles[i + 2] = new Circle(Color.BLUE, Finger.NONE, context);
-        circles[i + 3] = new Circle(Color.RED, Finger.NONE, context);
+      circles[i]     = new Circle(Color.GREEN, context);
+      circles[i + 1] = new Circle(Color.YELLOW, context);
+      circles[i + 2] = new Circle(Color.BLUE, context);
+      circles[i + 3] = new Circle(Color.RED, context);
     }
 
 	}
 
 	public int getCount() {
-        return circles.length;
+    return circles.length;
   }
 
   public Circle getItem(int position) {
-      return circles[position];
+    return circles[position];
   }
 
   public long getItemId(int position) {
-      return 0;
+    return 0;
   }
 
   // create a new ImageView for each item referenced by the Adapter

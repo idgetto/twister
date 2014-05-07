@@ -22,15 +22,19 @@ public class Circle {
   private Color color;
   private int imageId;
   private Finger finger;
+  private Player player;
   private Context context;
 
-  public Circle(Color color, Finger finger, Context context) {
+  public Circle(Color color, Context context) {
+    this(color, Finger.NONE, context);
+  }
 
+  public Circle(Color color, Finger finger, Context context) {
     this.color = color;
     this.imageId = images[color.getId()];
     this.finger = finger;
+    this.player = null;
     this.context = context;
-
   }
 
   public void setColor(Color color) {

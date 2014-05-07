@@ -11,8 +11,8 @@ import android.content.Context;
 
 public class GameActivity extends Activity {
 
-  private BoardView boardView;
-  private MoveView moveView;
+  private GridView boardView;
+  private GridView moveView;
   private TextView textView;
 
   private Player currentPlayer;
@@ -25,17 +25,20 @@ public class GameActivity extends Activity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.game_activity);
 
-      boardView = (BoardView) findViewById(R.id.board_view);
-      moveView  = (MoveView)  findViewById(R.id.move_view);
+      boardView = (GridView) findViewById(R.id.board_view);
+      moveView  = (GridView)  findViewById(R.id.move_view);
       textView  = (TextView)  findViewById(R.id.text_view);
 
       boardView.setAdapter(new BoardAdapter(this));
 
       final Context context = this;
-      boardView.setOnItemClickListener(new OnItemClickListener() {
+      // onTouchListener?
+      boardView.setOnClickListener(new OnClickListener() {
 
-        public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-          Toast.makeText(context, "" + position, Toast.LENGTH_SHORT).show();
+        public void onClick(AdapterView<?> parent, View v, int position, long id) {
+          Circle circle = (Circle) parent.getItemAtPosition(position);
+          circle.setPlayer(currentPlayer);
+          circle.setFinger()
         }
 
       });

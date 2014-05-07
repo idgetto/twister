@@ -5,12 +5,14 @@
     android:layout_height="fill_parent"
     >
 
-  <com.moonshine.twister.MoveView android:id="@+id/move_view"
+  <GridView android:id="@+id/move_view"
+      android:numColumns="4"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
     />
 
-  <com.moonshine.twister.BoardView android:id="@+id/board_view"
+  <GridView android:id="@+id/board_view"
+      android:numColumns="4"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
     />
