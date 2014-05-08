@@ -1,0 +1,27 @@
+	Game displays moves and players take turns making them
+		1. Game randomly selects a Color and Finger for Player One, indicated in the top as symbols, or in the bottom as text. Available circles are also glowed.
+		2. Player One presses that Circle with the correct finger. 
+		3. Game now chooses a move for Player Two; similar to Step 1.
+		4. Player Two makes his a correct move.
+	After Step 2, Player One's turn has ended because he made a successful move. Diromg Step 3, the top and bottom displays should display information for Player Two. After step 4, the game goes back to Player One's turn and display Player One's information again.
+	
+	Players lose when they let go of a Finger that does not have a new move.
+		1. Player One has one or more Fingers already down as moves. 
+		2. It is Player One's turn. A move is generated for a Finger.
+		3. Player One lets go of another Finger from Step 1 that is not the same Finger from Step 2.
+	After Step 3, Player One loses because he doesn't have his fingers where they should be.
+		
+	Players lose when they let go of a Finger while it's the other player's turn
+		1. Player One has one or more fingers already down as moves.
+		2. It is Player Two's turn.
+		3. Player One lets go of their finger.
+	After Step 3, Player One loses.
+	
+	Choosing a move for already used finger
+		1. On the board, Player One's fingers are all occupied.
+		2. The game generates a new move for Player One, such as Index Finger on Red.
+		3. Player One lets go of his Index Finger.
+		4. Player One presses his Index Finger on the same spot as where it recently was.
+		5. Player One lets go of his Index Finger.
+		6. Player One presses his Index Finger on a new, correct color circle.
+	In Step 3, Player One does not lose because it no longer needs to be on the old Circle. On step 4, nothing happens because he cannot choose the exact same Circle as he was just on. Again, nothing happens on step 5. On Step 6, the game registers his correct move and it is now Player Two's turn.
