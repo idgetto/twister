@@ -4,4 +4,4 @@
 project_name=${PWD##*/}
 
 ant debug
-adb install -rd bin/${project_name}-debug.apk
+adb -d install -r  bin/${project_name}-debug.apk
