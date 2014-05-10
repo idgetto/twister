@@ -29,14 +29,16 @@ public class GameActivity extends Activity {
       setContentView(R.layout.game_activity);
 
       boardView = (GridView) findViewById(R.id.board_view);
-      moveView  = (GridView)  findViewById(R.id.move_view);
-      textView  = (TextView)  findViewById(R.id.text_view);
+      moveView  = (GridView) findViewById(R.id.move_view);
+      textView  = (TextView) findViewById(R.id.text_view);
 
       playerOne = new Player();
       playerTwo = new Player();
       currentPlayer = playerOne;
 
-      boardView.setAdapter(new BoardAdapter(this));
+      boardView.setAdapter(new BoardAdapter(this, boardView));
+
+      final Context context = this;
 
       boardView.setOnTouchListener(new OnTouchListener() {
 
@@ -46,16 +48,18 @@ public class GameActivity extends Activity {
           int eventY = (int) event.getY();
           int index = boardView.pointToPosition(eventX, eventY);
           Circle circle = (Circle) boardView.getItemAtPosition(index);
+          System.out.println("Event!!!" + index + " " + event.getAction());
 
           switch (event.getAction()) {
 
             case ACTION_DOWN:
-              // circle.setPlayer(currentPlayer);
-              // circle.setFinger(Finger.INDEX);
+                // Toast.makeText(context, "Touched circle at index: " + index, Toast.LENGTH_SHORT).show();
+              textView.setText("Touched circle at index: " + index);
               break;
 
             case ACTION_UP:
-
+                // Toast.makeText(context, "Let go of circle at index: " + index, Toast.LENGTH_SHORT).show();
+              textView.setText("Let go of circle at index: " + index);
               break;
 
           }

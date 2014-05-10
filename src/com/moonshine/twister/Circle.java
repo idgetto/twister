@@ -6,10 +6,10 @@ public class Circle {
 
   // TODO: add images
   private static final int[] images = {
-                                        // R.drawable.green_circle,
-                                        // R.drawable.yellow_circle,
-                                        // R.drawable.blue_circle,
-                                        // R.drawable.red_circle
+                                        R.drawable.green_circle,
+                                        R.drawable.yellow_circle,
+                                        R.drawable.blue_circle,
+                                        R.drawable.red_circle
                                       };
 
   private static final int[] glowImages = {

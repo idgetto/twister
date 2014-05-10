@@ -1,26 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
+    android:layout_weight="1">
 
-  <GridView android:id="@+id/move_view"
+  <GridView
+      android:id="@+id/move_view"
+      android:layout_width="fill_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
       android:numColumns="4"
+      android:stretchMode="columnWidth"
+      android:gravity="center" />
+
+  <GridView
+      android:id="@+id/board_view"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
-    />
+      android:stretchMode="columnWidth"
+      android:gravity="center"
+      android:numColumns="4" >
 
-  <GridView android:id="@+id/board_view"
-      android:numColumns="4"
-      android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-    />
+  </GridView>
 
   <TextView
+      android:id="@+id/text_view"
       android:layout_width="fill_parent"
-      android:layout_height="wrap_content"
-      android:text="Hello World, GameActivity"
-      android:id="@+id/text_view" />
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:numColumns="4" >
+  </TextView>
 
-</RelativeLayout>
+</LinearLayout>
