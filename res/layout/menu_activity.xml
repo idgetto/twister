@@ -12,5 +12,35 @@
       android:text="Hello World, MenuActivity"
       android:id="@+id/textView" />
 
+  <Button
+      android:id="@+id/sp_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_below="@+id/textView"
+      android:layout_marginLeft="76dp"
+      android:layout_marginTop="18dp"
+      android:text="@string/sp_button"
+      android:onClick="spClick" />
+  
+  <Button
+      android:id="@+id/tp_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignRight="@+id/button1"
+      android:layout_below="@+id/button1"
+      android:text="@string/tp_button" 
+	  android:onClick="tpClick" />
+
+  <Button
+      android:id="@+id/score_button"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignLeft="@+id/button2"
+      android:layout_below="@+id/button2"
+      android:layout_marginLeft="19dp"
+      android:text="@string/score_button" 
+	  android:onClick="scoresClick" />
+
 </RelativeLayout>
 

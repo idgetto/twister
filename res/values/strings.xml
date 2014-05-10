@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Twister</string>
+    <string name="sp_button">Single Player</string>
+    <string name="tp_button">Two Players</string>
+    <string name="score_button">Scores</string>
+    
 </resources>
