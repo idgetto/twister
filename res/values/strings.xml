@@ -2,7 +2,7 @@
 <resources>
     <string name="app_name">Twister</string>
     <string name="sp_button">Single Player</string>
-    <string name="tp_button">Two Players</string>
+    <string name="tp_button">Two Player</string>
     <string name="score_button">Scores</string>
-    
+
 </resources>
