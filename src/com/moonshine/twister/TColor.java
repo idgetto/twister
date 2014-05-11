@@ -1,6 +1,6 @@
 package com.moonshine.twister;
 
-public enum Color {
+public enum TColor {
   GREEN(0),
   YELLOW(1),
   BLUE(2),
@@ -8,7 +8,7 @@ public enum Color {
 
   private int id;
 
-  Color(int id) {
+  TColor(int id) {
     this.id = id;
   }
 

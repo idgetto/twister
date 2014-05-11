@@ -1,11 +1,11 @@
 package com.moonshine.twister;
 
-public class Player {
+public class TPlayer {
 
 	private int score;
 
-	public Player() {
-	
+	public TPlayer() {
+
 	}
 
 }

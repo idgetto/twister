@@ -2,9 +2,9 @@ package com.moonshine.twister;
 
 import android.content.Context;
 
-public class Circle {
+public class TCircle {
 
-  // TODO: add images
+  private static int size = 100; // default to 100
   private static final int[] images = {
                                         R.drawable.green_circle,
                                         R.drawable.yellow_circle,
@@ -19,17 +19,17 @@ public class Circle {
                                             // R.drawable.red_glow_circle
                                           };
 
-  private Color color;
+  private TColor color;
   private int imageId;
   private Finger finger;
-  private Player player;
+  private TPlayer player;
   private Context context;
 
-  public Circle(Color color, Context context) {
+  public TCircle(TColor color, Context context) {
     this(color, Finger.NONE, context);
   }
 
-  public Circle(Color color, Finger finger, Context context) {
+  public TCircle(TColor color, Finger finger, Context context) {
     this.color = color;
     this.imageId = images[color.getId()];
     this.finger = finger;
@@ -37,7 +37,15 @@ public class Circle {
     this.context = context;
   }
 
-  public void setColor(Color color) {
+  public static void setSize(int size) {
+    TCircle.size = size;
+  }
+
+  public static int getSize() {
+    return size;
+  }
+
+  public void setColor(TColor color) {
     this.color = color;
   }
 
