@@ -45,6 +45,10 @@ public class Circle {
     return imageId;
   }
 
+  public Finger getFinger() {
+    return finger;
+  }
+
   public void glow() {
     this.imageId = glowImages[color.getId()];
   }

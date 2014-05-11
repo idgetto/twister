@@ -25,6 +25,8 @@ public class MoveView extends GridView {
 
   private void init(Context context) {
     this.context = context;
+    setAdapter(new MoveAdapter(context, this));
+    setBackgroundColor(android.graphics.Color.LTGRAY);
   }
 
 }
