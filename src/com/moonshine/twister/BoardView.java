@@ -1,15 +1,18 @@
 package com.moonshine.twister;
 
+import static android.view.MotionEvent.*;
+import android.view.MotionEvent;
 import android.widget.GridView;
 import android.content.Context;
-import android.util.AttributeSet;
-import android.view.MotionEvent;
-import static android.view.MotionEvent.*;
 import android.view.View.OnTouchListener;
-import android.view.View;
 import android.widget.Toast;
+import android.view.View;
+import android.util.AttributeSet;
 
 public class BoardView extends GridView {
+
+  public static final int ROWS = 4;
+  public static final int COLS = 4;
 
   private Context context;
 
@@ -43,7 +46,7 @@ public class BoardView extends GridView {
         int eventX = (int) event.getX();
         int eventY = (int) event.getY();
         int index = pointToPosition(eventX, eventY);
-        Circle circle = (Circle) getItemAtPosition(index);
+        TCircle circle = (TCircle) getItemAtPosition(index);
         System.out.println("Event!!!" + index);
 
         switch (event.getAction()) {

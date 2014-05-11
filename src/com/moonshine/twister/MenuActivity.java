@@ -1,9 +1,10 @@
 package com.moonshine.twister;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.app.Activity;
 import android.view.View;
+import android.content.Intent;
+import android.util.DisplayMetrics;
 
 public class MenuActivity extends Activity
 {
@@ -13,6 +14,14 @@ public class MenuActivity extends Activity
   {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.menu_activity);
+
+     // calculate the correct circle size
+    DisplayMetrics metrics = getResources().getDisplayMetrics();
+    int width = metrics.widthPixels;
+    int height = metrics.heightPixels;
+    int rows = BoardView.ROWS + MoveView.ROWS + 2;
+    int cols = BoardView.COLS;
+    TCircle.setSize(Math.min(width / cols, height / rows));
 
   }
 

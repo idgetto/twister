@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.widget.TextView;
 import android.widget.GridView;
+import android.util.DisplayMetrics;
 
 public class GameActivity extends Activity {
 
@@ -11,9 +12,9 @@ public class GameActivity extends Activity {
   private GridView moveView;
   private TextView textView;
 
-  private Player currentPlayer;
-  private Player playerOne;
-  private Player playerTwo;
+  private TPlayer currentPlayer;
+  private TPlayer playerOne;
+  private TPlayer playerTwo;
 
   /** Called when the activity is first created. */
     @Override
@@ -21,13 +22,12 @@ public class GameActivity extends Activity {
       super.onCreate(savedInstanceState);
       setContentView(R.layout.game_activity);
 
-      System.out.println("Just before findViewById");
       boardView = (BoardView) findViewById(R.id.board_view);
       moveView  = (GridView) findViewById(R.id.move_view);
       textView  = (TextView) findViewById(R.id.text_view);
 
-      playerOne = new Player();
-      playerTwo = new Player();
+      playerOne = new TPlayer();
+      playerTwo = new TPlayer();
       currentPlayer = playerOne;
 
     }
