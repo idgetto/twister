@@ -14,7 +14,7 @@ public abstract class Utils {
     return res;
   }
 
-  public static Bitmap labelBitmap(Bitmap bitmap, String label) {
+  public static Bitmap labelBitmap(Bitmap bitmap, String label, int textSize) {
 
     Bitmap copy = bitmap.copy(Bitmap.Config.ARGB_8888, true);
     Canvas canvas = new Canvas(copy);
@@ -22,7 +22,7 @@ public abstract class Utils {
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     paint.setColor(Color.WHITE);
     paint.setTextAlign(Paint.Align.CENTER);
-    paint.setTextSize(50);
+    paint.setTextSize(textSize);
 
     Rect bounds = new Rect();
     paint.getTextBounds("I", 0, 1, bounds);

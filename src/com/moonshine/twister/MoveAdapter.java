@@ -62,7 +62,9 @@ public class MoveAdapter extends TAdapter {
 
     String finger = circle.getFinger().toString();
     finger = Utils.capitalize(finger);
-    image = Utils.labelBitmap(image, finger);
+
+    // not sure if this text size will look good across devices
+    image = Utils.labelBitmap(image, finger, image.getWidth() / 4);
 
     imageView.setImageBitmap(image);
     return imageView;
