@@ -1,0 +1,12 @@
+Beginning:
+-	Buttons pop up one by one (add newMove to REQUIRED (MoveView)). Instantiates recentlyRemoved to -1
+-	OnTouch
+	o	Checkif touched circle matches newMove && not recentlyRemovedIndex
+		?	If not do NOTHING
+		?	If is set circle's finger
+-	UnTouch
+	o	If untouched circle has a finger
+		?	If circle is required (MoveView) LOSE 
+		?	Else set recentlyRemoved to current index and remove finger from circle
+	o	Else if has no finger do NOTHING 
+-	Go back to beginning
