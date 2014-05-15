@@ -78,6 +78,9 @@ public class MoveView extends GridView {
   // is this circle still necessary
   public boolean requires(TCircle circle) {
     Finger finger = circle.getFinger();
+
+    if (finger.getId() == -1) return false;
+
     TCircle required = circles[finger.getId()];
     return circle.getColor() == required.getColor();
   }

@@ -43,6 +43,9 @@ public class GameActivity extends Activity {
           int eventX = (int) event.getX(pointer);
           int eventY = (int) event.getY(pointer);
           int index = boardView.pointToPosition(eventX, eventY);
+
+          if (index == -1) return true;
+
           TCircle circle = (TCircle) boardView.getItemAtPosition(index);
 
 
