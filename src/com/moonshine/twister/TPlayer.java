@@ -10,6 +10,7 @@ public class TPlayer {
 
 	public TPlayer() {
     pressed = new HashSet<Integer>();
+    last = -1;
 	}
 
   public boolean using(int index) {
