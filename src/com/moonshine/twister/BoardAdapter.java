@@ -4,18 +4,15 @@ import android.graphics.BitmapFactory;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.content.res.Resources;
 import android.view.View;
 import android.content.Context;
 import android.graphics.Bitmap;
 
-
 public class BoardAdapter extends TAdapter {
 
 	private Context context;
   private BoardView boardView;
-	private TCircle[] circles;
   private Resources resources;
 
 	public BoardAdapter(Context context, BoardView boardView) {
@@ -23,8 +20,8 @@ public class BoardAdapter extends TAdapter {
 		this.context = context;
     this.boardView = boardView;
     resources = context.getResources();
-    circles = new TCircle[BoardView.ROWS * BoardView.COLS];
 
+    TCircle[] circles = boardView.circles;
     for (int i = 0; i < circles.length; i += 4) {
       circles[i]     = new TCircle(TColor.GREEN, context);
       circles[i + 1] = new TCircle(TColor.YELLOW, context);
@@ -35,11 +32,11 @@ public class BoardAdapter extends TAdapter {
 	}
 
 	public int getCount() {
-    return circles.length;
+    return boardView.circles.length;
   }
 
   public TCircle getItem(int position) {
-    return circles[position];
+    return boardView.circles[position];
   }
 
   public long getItemId(int position) {
@@ -59,7 +56,7 @@ public class BoardAdapter extends TAdapter {
       imageView = (ImageView) convertView;
     }
 
-	  TCircle circle = circles[position];
+	  TCircle circle = boardView.circles[position];
     Bitmap image = BitmapFactory.decodeResource(context.getResources(), circle.getImageId());
     imageView.setImageBitmap(image);
     return imageView;

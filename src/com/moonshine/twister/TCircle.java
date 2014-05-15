@@ -45,8 +45,13 @@ public class TCircle {
     return size;
   }
 
+  public TColor getColor() {
+    return color;
+  }
+
   public void setColor(TColor color) {
     this.color = color;
+    this.imageId = images[color.getId()];
   }
 
   public int getImageId() {
@@ -55,6 +60,18 @@ public class TCircle {
 
   public Finger getFinger() {
     return finger;
+  }
+
+  public void setFinger(Finger finger) {
+    this.finger = finger;
+  }
+
+  public TPlayer getPlayer() {
+    return player;
+  }
+
+  public void setPlayer(TPlayer player) {
+    this.player = player;
   }
 
   public void glow() {

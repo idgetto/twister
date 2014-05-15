@@ -12,32 +12,18 @@ public class MoveAdapter extends TAdapter {
 
   private Context context;
   private MoveView moveView;
-  private TCircle[] circles;
 
   public MoveAdapter(Context context, MoveView moveView) {
-
     this.context = context;
     this.moveView = moveView;
-    circles = new TCircle[moveView.ROWS * moveView.COLS];
-
-    for (int i = 0; i < circles.length; i++) {
-      TColor[] colors = TColor.values();
-      TColor color = colors[(int) (Math.random() * (colors.length))];
-
-      Finger[] fingers = Finger.values();
-      Finger finger = fingers[i + 1];
-
-      circles[i] = new TCircle(color, finger, context);
-    }
-
   }
 
   public int getCount() {
-    return circles.length;
+    return moveView.circles.length;
   }
 
   public TCircle getItem(int position) {
-    return circles[position];
+    return moveView.circles[position];
   }
 
   public long getItemId(int position) {
@@ -46,18 +32,17 @@ public class MoveAdapter extends TAdapter {
 
   // create a new ImageView for each item referenced by the Adapter
   public View getView(int position, View convertView, ViewGroup parent) {
-    ImageView imageView;
+    ImageView imageView = new ImageView(context);
 
-    if (convertView == null) {  // if it's not recycled, initialize some attributes
-      imageView = new ImageView(context);
-      imageView.setLayoutParams(new GridView.LayoutParams(TCircle.getSize(), TCircle.getSize()));
-      imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-      imageView.setPadding(PADDING, PADDING, PADDING, PADDING);
-    } else {
-      imageView = (ImageView) convertView;
-    }
+    imageView.setLayoutParams(new GridView.LayoutParams(TCircle.getSize(), TCircle.getSize()));
+    imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+    imageView.setPadding(PADDING, PADDING, PADDING, PADDING);
 
-    TCircle circle = circles[position];
+    TCircle circle = moveView.circles[position];
+
+    // should be blank in no move is set for this circle
+    if (circle == null) return imageView;
+
     Bitmap image = BitmapFactory.decodeResource(context.getResources(), circle.getImageId());
 
     String finger = circle.getFinger().toString();

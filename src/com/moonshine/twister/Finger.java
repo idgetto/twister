@@ -12,4 +12,8 @@ public enum Finger {
   Finger(int id) {
     this.id = id;
   }
+
+  public int getId() {
+    return id;
+  }
 }
