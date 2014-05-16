@@ -57,13 +57,14 @@ public class BoardView extends GridView {
           TCircle circle = (TCircle) getItemAtPosition(index);
 
           System.out.println("event: " + event.getActionMasked());
+          PointerCoords coord;
           switch (event.getActionMasked()) {
 
             case ACTION_DOWN:
             case ACTION_POINTER_DOWN:
 
               // get touch location for this pointer
-              PointerCoords coord = new PointerCoords();
+              coord = new PointerCoords();
               event.getPointerCoords(event.findPointerIndex(pid), coord);
 
               pointerLocs.put(pid, coord);
@@ -101,15 +102,28 @@ public class BoardView extends GridView {
                 int x = (int) event.getX(event.findPointerIndex(pointerId));
                 int y = (int) event.getY(event.findPointerIndex(pointerId));
                 int endIndex = pointToPosition(x, y);
+                if (endIndex == -1) continue;
 
                 // only care about moving to another circle
                 if (startIndex == endIndex) continue;
 
+                // remove pointer loc
+                pointerLocs.remove(pid);
+                
+                coord = new PointerCoords();
+                event.getPointerCoords(event.findPointerIndex(pid), coord);
+
+                pointerLocs.put(pid, coord);
+                
                 TCircle startCircle = circles[startIndex];
+                
+                TCircle endCircle = circles[endIndex];
                 System.out.println("Pointer id #" + pointerId + " moved from " + startIndex + " to " + endIndex);
 
                 System.out.println("Inside action move event");
-                gameActivity.onMove(startIndex, endIndex, startCircle, circle);
+                gameActivity.onMove(startIndex, endIndex, startCircle, endCircle);
+                
+                
 
               }
 

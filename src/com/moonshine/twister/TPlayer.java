@@ -11,8 +11,21 @@ public class TPlayer {
 	public TPlayer() {
     pressed = new HashSet<Integer>();
     last = -1;
+    score = 0;
 	}
 
+  public int getScore() {
+	  return score;
+  }
+  
+  public void setScore(int change) {
+	  score = change;
+  }
+  
+  public void incrementScore() {
+	  score++;
+  }
+	
   public boolean using(int index) {
     return (last == index || pressed.contains(index));
   }

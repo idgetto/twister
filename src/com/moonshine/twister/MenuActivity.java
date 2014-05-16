@@ -42,7 +42,6 @@ public class MenuActivity extends Activity
   public void scoresClick(View view)
   {
 	  Intent scoresIntent = new Intent(this, ScoresActivity.class);
-	  scoresIntent.putExtra("menu", true);
 	  startActivity(scoresIntent);
   }
 

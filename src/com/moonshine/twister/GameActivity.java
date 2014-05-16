@@ -1,13 +1,9 @@
 package com.moonshine.twister;
 
-import static android.view.MotionEvent.*;
-import android.view.MotionEvent;
-import android.widget.TextView;
-import android.widget.GridView;
-import android.os.Bundle;
 import android.app.Activity;
-import android.view.View.OnTouchListener;
-import android.view.View;
+import android.content.Intent;
+import android.os.Bundle;
+import android.widget.TextView;
 
 public class GameActivity extends Activity {
 
@@ -48,18 +44,20 @@ public class GameActivity extends Activity {
 
         circle.setPlayer(currentPlayer);
         circle.setFinger(finger);
-
+        
+        currentPlayer.incrementScore();
+        
         moveView.update();
         textView.append("\nColor: "  + Utils.capitalize(moveView.nextColor().toString()));
         textView.append("\nFinger: " + Utils.capitalize(moveView.nextFinger().toString()));
+        
       }
     }
 
     public void onRelease(int index, TCircle circle) {
       // requries --> is this circle is still necessary
       if (moveView.requires(circle))
-        textView.append("Game Over!");
-        // gameOver();
+         gameOver();
       else {
         currentPlayer.release(index);
         circle.setPlayer(null);
@@ -67,13 +65,24 @@ public class GameActivity extends Activity {
       }
     }
 
-    public void onMove(int startIndex, int endIndex, TCircle origCircle, TCircle circle) {
+    public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
       textView.setText("Moved to index " + endIndex);
       textView.append("\nMoved from index: " + startIndex + " to index: " + endIndex);
 
-      if (startIndex != endIndex && moveView.requires(origCircle)) {
-        textView.append("Game Over!");
+      if (startIndex != endIndex) {
+    	  onRelease(startIndex, startCircle);
+    	  onPress(endIndex, endCircle);
+    	  
       }
+    }
+    
+    
+    private void gameOver() {
+    	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
+    	scoreIntent.putExtra("p1score", playerOne.getScore());
+    	
+    	startActivity(scoreIntent);
+    	
     }
 
   // private void changePlayer() {
