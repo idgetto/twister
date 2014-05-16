@@ -26,21 +26,23 @@ public class MenuActivity extends Activity {
 
   }
 
-  public void spClick(View view) {
-	 Intent spIntent = new Intent(this, GameActivity.class);
-	 spIntent.putExtra("single", true);
-	 startActivity(spIntent);
+  public void onePlayer(View view) {
+	   startGame(true);
   }
 
-  public void tpClick(View view) {
-	  Intent tpIntent = new Intent(this, GameActivity.class);
-	  tpIntent.putExtra("single", false);
-	  startActivity(tpIntent);
+  public void twoPlayer(View view) {
+	  startGame(false);
   }
 
-  public void scoresClick(View view) {
+  public void scores(View view) {
 	  Intent scoresIntent = new Intent(this, ScoresActivity.class);
 	  startActivity(scoresIntent);
+  }
+
+  private void startGame(boolean single) {
+    Intent gameIntent = new Intent(this, GameActivity.class);
+    gameIntent.putExtra("single", single);
+    startActivity(gameIntent);
   }
 
 }
