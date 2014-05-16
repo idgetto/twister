@@ -78,10 +78,15 @@ public class GameActivity extends Activity {
     
     
     private void gameOver() {
-    	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
-    	scoreIntent.putExtra("p1score", playerOne.getScore());
+    	Intent resultIntent = new Intent();
+    	resultIntent.putExtra("p1score", playerOne.getScore());
+    	setResult(RESULT_OK, resultIntent);
+    	finish();
     	
-    	startActivity(scoreIntent);
+//    	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
+//    	scoreIntent.putExtra("p1score", playerOne.getScore());
+//    	finish();
+//    	getApplicationContext().startActivity(scoreIntent);
     	
     }
 

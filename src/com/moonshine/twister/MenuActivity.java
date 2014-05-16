@@ -8,6 +8,9 @@ import android.util.DisplayMetrics;
 
 public class MenuActivity extends Activity
 {
+	private static final int PLAYER_ONE_SCORE = 1;
+	private static final int PLAYER_TWO_SCORE = 2;
+	
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -29,7 +32,12 @@ public class MenuActivity extends Activity
   {
 	 Intent spIntent = new Intent(this, GameActivity.class);
 	 spIntent.putExtra("single", true);
-	 startActivity(spIntent);
+	 startActivityForResult(spIntent, PLAYER_ONE_SCORE);
+  }
+  
+  protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+	  data.setClass(this, ScoresActivity.class);
+	  startActivity(data);
   }
 
   public void tpClick(View view)
