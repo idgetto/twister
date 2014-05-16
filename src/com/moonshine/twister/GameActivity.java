@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
+import android.view.MenuItem;
 
 public class GameActivity extends Activity {
 
@@ -44,13 +45,13 @@ public class GameActivity extends Activity {
 
         circle.setPlayer(currentPlayer);
         circle.setFinger(finger);
-        
+
         currentPlayer.incrementScore();
-        
+
         moveView.update();
         textView.append("\nColor: "  + Utils.capitalize(moveView.nextColor().toString()));
         textView.append("\nFinger: " + Utils.capitalize(moveView.nextFinger().toString()));
-        
+
       }
     }
 
@@ -72,22 +73,17 @@ public class GameActivity extends Activity {
       if (startIndex != endIndex) {
     	  onRelease(startIndex, startCircle);
     	  onPress(endIndex, endCircle);
-    	  
       }
     }
-    
-    
+
+
     private void gameOver() {
-    	Intent resultIntent = new Intent();
-    	resultIntent.putExtra("p1score", playerOne.getScore());
-    	setResult(RESULT_OK, resultIntent);
-    	finish();
-    	
-//    	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
-//    	scoreIntent.putExtra("p1score", playerOne.getScore());
-//    	finish();
-//    	getApplicationContext().startActivity(scoreIntent);
-    	
+      if (!isFinishing()) {
+        finish();
+       	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
+       	scoreIntent.putExtra("p1score", playerOne.getScore());
+       	startActivity(scoreIntent);
+       }
     }
 
   // private void changePlayer() {
