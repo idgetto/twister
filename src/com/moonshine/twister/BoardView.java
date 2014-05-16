@@ -96,12 +96,10 @@ public class BoardView extends GridView {
                 PointerCoords startLoc = pointerLocs.get(pointerId);
                 int startIndex = pointToPosition((int) startLoc.x, (int) startLoc.y);
 
-                // we must get the current position for each pointer
-                int realPointerIndex = event.findPointerIndex(pointerId); // index may have changed
-                if (realPointerIndex == -1) continue;
+                if (event.findPointerIndex(pointerId); == -1) continue;
 
-                int x = (int) event.getX(realPointerIndex);
-                int y = (int) event.getY(realPointerIndex);
+                int x = (int) event.getX(event.findPointerIndex(pointerId));
+                int y = (int) event.getY(event.findPointerIndex(pointerId));
                 int endIndex = pointToPosition(x, y);
 
                 // only care about moving to another circle
