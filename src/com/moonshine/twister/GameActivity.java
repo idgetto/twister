@@ -50,7 +50,8 @@ public class GameActivity extends Activity {
         circle.setFinger(finger);
 
         moveView.update();
-        textView.append("\nColor: " + moveView.nextColor());
+        textView.append("\nColor: "  + Utils.capitalize(moveView.nextColor().toString()));
+        textView.append("\nFinger: " + Utils.capitalize(moveView.nextFinger().toString()));
       }
     }
 
