@@ -96,7 +96,7 @@ public class BoardView extends GridView {
                 PointerCoords startLoc = pointerLocs.get(pointerId);
                 int startIndex = pointToPosition((int) startLoc.x, (int) startLoc.y);
 
-                if (event.findPointerIndex(pointerId); == -1) continue;
+                if (event.findPointerIndex(pointerId) == -1) continue;
 
                 int x = (int) event.getX(event.findPointerIndex(pointerId));
                 int y = (int) event.getY(event.findPointerIndex(pointerId));
