@@ -45,6 +45,14 @@ public class MoveView extends GridView {
     return next.getFinger();
   }
 
+  public TColor nextColor() {
+    return next.getColor();
+  }
+
+  public TCircle nextCircle() {
+    return next;
+  }
+
   public void update() {
     // next.fade();
 
@@ -79,9 +87,16 @@ public class MoveView extends GridView {
   public boolean requires(TCircle circle) {
     Finger finger = circle.getFinger();
 
+    // accidental tap on unused circle
     if (finger.getId() == -1) return false;
 
     TCircle required = circles[finger.getId()];
+
+    // check for same color twice
+    // in which case you are allowed to release the color
+    if (required == next)
+      return false;
+
     return circle.getColor() == required.getColor();
   }
 

@@ -34,58 +34,45 @@ public class GameActivity extends Activity {
       currentPlayer = playerOne;
 
       moveView.update();
+    }
 
-      boardView.setOnTouchListener(new OnTouchListener() {
+    public void onPress(int index, TCircle circle) {
+      textView.append("Touched index: " + index);
 
-        public boolean onTouch(View view, MotionEvent event) {
+      // needs --> does the newest instruction call for this circle
+      if (!currentPlayer.using(index) && moveView.needs(circle)) {
+        textView.setText("Success! Index: " + index);
 
-          int pointer = event.getActionIndex();
-          int eventX = (int) event.getX(pointer);
-          int eventY = (int) event.getY(pointer);
-          int index = boardView.pointToPosition(eventX, eventY);
+        Finger finger = moveView.nextFinger();
+        currentPlayer.press(index);
 
-          if (index == -1) return true;
+        circle.setPlayer(currentPlayer);
+        circle.setFinger(finger);
 
-          TCircle circle = (TCircle) boardView.getItemAtPosition(index);
+        moveView.update();
+        textView.append("\nColor: " + moveView.nextColor());
+      }
+    }
 
+    public void onRelease(int index, TCircle circle) {
+      // requries --> is this circle is still necessary
+      if (moveView.requires(circle))
+        textView.append("Game Over!");
+        // gameOver();
+      else {
+        currentPlayer.release(index);
+        circle.setPlayer(null);
+        circle.setFinger(Finger.NONE);
+      }
+    }
 
-          switch (event.getActionMasked()) {
+    public void onMove(int startIndex, int endIndex, TCircle origCircle, TCircle circle) {
+      textView.setText("Moved to index " + endIndex);
+      textView.append("\nMoved from index: " + startIndex + " to index: " + endIndex);
 
-            case ACTION_DOWN:
-            case ACTION_POINTER_DOWN:
-                textView.append("Touched index: " + index);
-
-                // needs --> does the newest instruction call for this circle
-                if (!currentPlayer.using(index) && moveView.needs(circle)) {
-                  textView.setText("Success! Index: " + index);
-                  currentPlayer.press(index);
-                  circle.setPlayer(currentPlayer);
-                  circle.setFinger(moveView.nextFinger());
-                  moveView.update();
-                }
-              break;
-
-            case ACTION_UP:
-            case ACTION_POINTER_UP:
-                // requries --> is this circle is still necessary
-                if (moveView.requires(circle))
-                  textView.setText("Game Over!");
-                  // gameOver();
-                else {
-                  currentPlayer.release(index);
-                  circle.setPlayer(null);
-                  circle.setFinger(Finger.NONE);
-                }
-              break;
-
-          }
-
-          return true;
-
-        }
-
-      });
-
+      if (startIndex != endIndex && moveView.requires(origCircle)) {
+        textView.append("Game Over!");
+      }
     }
 
   // private void changePlayer() {
