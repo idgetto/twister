@@ -27,7 +27,7 @@ public class MenuActivity extends Activity {
   }
 
   public void onePlayer(View view) {
-	   startGame(true);
+	  startGame(true);
   }
 
   public void twoPlayer(View view) {

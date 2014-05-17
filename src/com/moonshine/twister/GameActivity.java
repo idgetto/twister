@@ -5,8 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.view.MenuItem;
+import android.os.Vibrator;
 
 public class GameActivity extends Activity {
+
+  private static final long VIBRATE_TIME = 650;
 
   private BoardView boardView;
   private MoveView moveView;
@@ -80,6 +83,12 @@ public class GameActivity extends Activity {
     private void gameOver() {
       if (!isFinishing()) {
         finish();
+
+        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+        if (vibrator != null) {
+          vibrator.vibrate(VIBRATE_TIME);
+        }
+
        	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
        	scoreIntent.putExtra("p1score", playerOne.getScore());
        	startActivity(scoreIntent);
