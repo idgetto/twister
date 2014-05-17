@@ -90,29 +90,21 @@ public class BoardView extends GridView {
                 // this should never happen, but just to be safe
                 if (!pointerLocs.containsKey(pointerId)) continue;
 
-                // retrieve start location
                 PointerCoords startLoc = pointerLocs.get(pointerId);
-                int startCircleIndex = pointToPosition((int) startLoc.x, (int) startLoc.y);
+                PointerCoords endLoc = new PointerCoords();
+                event.getPointerCoords(event.findPointerIndex(pid), endLoc);
 
-                if (event.findPointerIndex(pointerId) == -1) continue;
-
-                int endCircleIndex = getPointerPosition(event, pointerId);
-                if (endCircleIndex == -1) continue;
-
-                // only care about moving to another circle
-                if (startCircleIndex == endCircleIndex) continue;
+                if (!hasMovedCircles(startLoc, endLoc)) continue;
 
                 // update pointer location
-                coord = new PointerCoords();
-                event.getPointerCoords(event.findPointerIndex(pointerId), coord);
-                pointerLocs.put(pointerId, coord);
+                pointerLocs.put(pointerId, endLoc);
 
+                int startCircleIndex = getCircleIndex(startLoc);
+                int endCircleIndex = getCircleIndex(startLoc);
                 TCircle startCircle = circles[startCircleIndex];
                 TCircle endCircle = circles[endCircleIndex];
 
-                System.out.println("Inside action move event");
                 gameActivity.onMove(startCircleIndex, endCircleIndex, startCircle, endCircle);
-
               }
 
               break;
@@ -148,6 +140,16 @@ public class BoardView extends GridView {
     int x = (int) event.getX(event.findPointerIndex(pointerId));
     int y = (int) event.getY(event.findPointerIndex(pointerId));
     return pointToPosition(x, y);
+  }
+
+  private boolean hasMovedCircles(PointerCoords start, PointerCoords end) {
+    int startIndex = getCircleIndex(start);
+    int endIndex = getCircleIndex(end);
+    return start != end;
+  }
+
+  private int getCircleIndex(PointerCoords coord) {
+    return pointToPosition((int) coord.x, (int) coord.y);
   }
 
 }

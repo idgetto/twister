@@ -37,7 +37,6 @@ public class GameActivity extends Activity {
     }
 
     public void onPress(int index, TCircle circle) {
-      textView.append("Touched index: " + index);
 
       // needs --> does the newest instruction call for this circle
       if (!currentPlayer.using(index) && moveView.needs(circle)) {
@@ -60,8 +59,10 @@ public class GameActivity extends Activity {
 
     public void onRelease(int index, TCircle circle) {
       // requries --> is this circle is still necessary
-      if (moveView.requires(circle))
-         gameOver();
+      if (moveView.requires(circle)) {
+        System.out.println("Game Over:\nreleased index: " + index + ", color: " + circle.getColor());
+        gameOver();
+      }
       else {
         currentPlayer.release(index);
         circle.setPlayer(null);
@@ -70,9 +71,6 @@ public class GameActivity extends Activity {
     }
 
     public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
-      textView.setText("Moved to index " + endIndex);
-      textView.append("\nMoved from index: " + startIndex + " to index: " + endIndex);
-
       if (startIndex != endIndex) {
     	  onRelease(startIndex, startCircle);
     	  onPress(endIndex, endCircle);
