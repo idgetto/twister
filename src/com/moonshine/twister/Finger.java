@@ -18,6 +18,6 @@ public enum Finger {
   }
 
   public static Finger get(int id) {
-    return Finger.values()[id];
+    return Finger.values()[id + 1];
   }
 }

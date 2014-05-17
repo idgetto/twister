@@ -47,7 +47,7 @@ public class MoveView extends GridView {
     return circles;
   }
 
-  public TCircle[] getCircle(int index) {
+  public TCircle getCircle(int index) {
     return circles[index];
   }
 
@@ -66,7 +66,7 @@ public class MoveView extends GridView {
   public void update() {
     // next.fade();
 
-    int index = (int) (Math.random() * circles.length) + 1;
+    int index = (int) (Math.random() * circles.length);
 
     TColor color = TColor.random();
     Finger finger = Finger.get(index);

@@ -21,7 +21,7 @@ public class BoardAdapter extends TAdapter {
     this.boardView = boardView;
     resources = context.getResources();
 
-    TCircle[] circles = boardView.circles;
+    TCircle[] circles = boardView.getCircles();
     for (int i = 0; i < circles.length; i += 4) {
       circles[i]     = new TCircle(TColor.GREEN, context);
       circles[i + 1] = new TCircle(TColor.YELLOW, context);
