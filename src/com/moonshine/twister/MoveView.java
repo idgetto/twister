@@ -12,8 +12,8 @@ public class MoveView extends GridView {
 
   public static final int ROWS = 1;
   public static final int COLS = 4;
-  public final TCircle[] circles = new TCircle[ROWS * COLS];
 
+  private final TCircle[] circles = new TCircle[ROWS * COLS];
   private Context context;
   private TCircle next;
 
@@ -36,9 +36,19 @@ public class MoveView extends GridView {
     this.context = context;
     setAdapter(new MoveAdapter(context, this));
     setBackgroundColor(Color.LTGRAY);
+
+    // do nothing (prevents blue selection)
     setOnTouchListener(new OnTouchListener() {
       public boolean onTouch(View v, MotionEvent event) {return true;}
     });
+  }
+
+  public TCircle[] getCircles() {
+    return circles;
+  }
+
+  public TCircle[] getCircle(int index) {
+    return circles[index];
   }
 
   public Finger nextFinger() {
@@ -56,13 +66,10 @@ public class MoveView extends GridView {
   public void update() {
     // next.fade();
 
-    int index = (int) (Math.random() * circles.length);
+    int index = (int) (Math.random() * circles.length) + 1;
 
-    TColor[] colors = TColor.values();
-    TColor color = colors[(int) (Math.random() * colors.length)];
-
-    Finger[] fingers = Finger.values();
-    Finger finger = fingers[index + 1];
+    TColor color = TColor.random();
+    Finger finger = Finger.get(index);
 
     if (circles[index] == null) {
       circles[index] = new TCircle(color, finger, context);
@@ -72,6 +79,7 @@ public class MoveView extends GridView {
       circle.setColor(color);
       circle.setFinger(finger);
     }
+
     next = circles[index];
 
     // refreshes the gridView
@@ -84,11 +92,12 @@ public class MoveView extends GridView {
   }
 
   // is this circle still necessary
+  // based on color and finger
   public boolean requires(TCircle circle) {
     Finger finger = circle.getFinger();
 
     // accidental tap on unused circle
-    if (finger.getId() == -1) return false;
+    if (finger == Finger.NONE) return false;
 
     TCircle required = circles[finger.getId()];
 

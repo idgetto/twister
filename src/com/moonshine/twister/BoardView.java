@@ -15,8 +15,8 @@ public class BoardView extends GridView {
 
   public static final int ROWS = 4;
   public static final int COLS = 4;
-  public final TCircle[] circles = new TCircle[ROWS * COLS];
 
+  private final TCircle[] circles = new TCircle[ROWS * COLS];
   private GameActivity gameActivity;
   private Context context;
   private HashMap<Integer, PointerCoords> pointerLocs;
@@ -50,13 +50,13 @@ public class BoardView extends GridView {
 
           int eventX = (int) event.getX(event.findPointerIndex(pid));
           int eventY = (int) event.getY(event.findPointerIndex(pid));
-          int index = pointToPosition(eventX, eventY);
+          int circleIndex = pointToPosition(eventX, eventY);
 
-          if (index == -1) return true;
+          // touch is outside the view
+          if (circleIndex == -1) return true;
 
-          TCircle circle = (TCircle) getItemAtPosition(index);
+          TCircle circle = (TCircle) getItemAtPosition(circleIndex);
 
-          System.out.println("event: " + event.getActionMasked());
           PointerCoords coord;
           switch (event.getActionMasked()) {
 
@@ -67,20 +67,19 @@ public class BoardView extends GridView {
               coord = new PointerCoords();
               event.getPointerCoords(event.findPointerIndex(pid), coord);
 
+              // save the location of this pointer
               pointerLocs.put(pid, coord);
 
-              System.out.println("Inside action down event");
-              gameActivity.onPress(index, circle);
+              gameActivity.onPress(circleIndex, circle);
               break;
 
             case ACTION_UP:
             case ACTION_POINTER_UP:
 
-              // remove pointer loc
+              // remove pointer location
               pointerLocs.remove(pid);
 
-              System.out.println("Inside action up event");
-              gameActivity.onRelease(index, circle);
+              gameActivity.onRelease(circleIndex, circle);
               break;
 
             case ACTION_MOVE:
@@ -89,41 +88,37 @@ public class BoardView extends GridView {
               // but it doesn't know which pointer caused the event.
               // So we must do this for all pointers
               ArrayList<Integer> ids = getPointerIds(event);
-              for (int pointerId : ids) {
+              for (int pid : ids) {
 
+                // this should never happen, but just to be safe
                 if (!pointerLocs.containsKey(pointerId)) continue;
 
                 // retrieve start location
                 PointerCoords startLoc = pointerLocs.get(pointerId);
-                int startIndex = pointToPosition((int) startLoc.x, (int) startLoc.y);
+                int startCircleIndex = pointToPosition((int) startLoc.x, (int) startLoc.y);
 
                 if (event.findPointerIndex(pointerId) == -1) continue;
 
                 int x = (int) event.getX(event.findPointerIndex(pointerId));
                 int y = (int) event.getY(event.findPointerIndex(pointerId));
-                int endIndex = pointToPosition(x, y);
-                if (endIndex == -1) continue;
+                int endCircleIndex = pointToPosition(x, y);
+                if (endCircleIndex == -1) continue;
 
                 // only care about moving to another circle
-                if (startIndex == endIndex) continue;
+                if (startCircleIndex == endCircleIndex) continue;
 
-                // remove pointer loc
-                pointerLocs.remove(pid);
-                
+                // update pointer location
                 coord = new PointerCoords();
                 event.getPointerCoords(event.findPointerIndex(pid), coord);
-
                 pointerLocs.put(pid, coord);
-                
-                TCircle startCircle = circles[startIndex];
-                
-                TCircle endCircle = circles[endIndex];
-                System.out.println("Pointer id #" + pointerId + " moved from " + startIndex + " to " + endIndex);
+
+                TCircle startCircle = circles[startCircleIndex];
+                TCircle endCircle = circles[endCircleIndex];
 
                 System.out.println("Inside action move event");
-                gameActivity.onMove(startIndex, endIndex, startCircle, endCircle);
-                
-                
+                gameActivity.onMove(startCircleIndex, endCircleIndex, startCircle, endCircle);
+
+
 
               }
 
@@ -136,6 +131,14 @@ public class BoardView extends GridView {
         }
 
       });
+  }
+
+  public TCircle[] getCircles() {
+    return circles;
+  }
+
+  public TCircle[] getCircle(int index) {
+    return circles[index];
   }
 
   private ArrayList<Integer> getPointerIds(MotionEvent event) {

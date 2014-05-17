@@ -16,4 +16,10 @@ public enum TColor {
     return id;
   }
 
+  public static TColor random() {
+    TColor[] colors = TColor.values();
+    TColor color = colors[(int) (Math.random() * colors.length)];
+    return color;
+  }
+
 }

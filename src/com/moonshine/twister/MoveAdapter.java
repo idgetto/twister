@@ -19,11 +19,11 @@ public class MoveAdapter extends TAdapter {
   }
 
   public int getCount() {
-    return moveView.circles.length;
+    return moveView.getCircles().length;
   }
 
   public TCircle getItem(int position) {
-    return moveView.circles[position];
+    return moveView.getCircle(position);
   }
 
   public long getItemId(int position) {
@@ -38,7 +38,7 @@ public class MoveAdapter extends TAdapter {
     imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
     imageView.setPadding(PADDING, PADDING, PADDING, PADDING);
 
-    TCircle circle = moveView.circles[position];
+    TCircle circle = moveView.getCircle(position);
 
     // should be blank in no move is set for this circle
     if (circle == null) return imageView;

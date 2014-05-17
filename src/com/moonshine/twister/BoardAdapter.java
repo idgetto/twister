@@ -32,11 +32,11 @@ public class BoardAdapter extends TAdapter {
 	}
 
 	public int getCount() {
-    return boardView.circles.length;
+    return boardView.getCircles().length;
   }
 
   public TCircle getItem(int position) {
-    return boardView.circles[position];
+    return boardView.getCircle(position);
   }
 
   public long getItemId(int position) {
@@ -56,7 +56,7 @@ public class BoardAdapter extends TAdapter {
       imageView = (ImageView) convertView;
     }
 
-	  TCircle circle = boardView.circles[position];
+	  TCircle circle = boardView.getCircle(position);
     Bitmap image = BitmapFactory.decodeResource(context.getResources(), circle.getImageId());
     imageView.setImageBitmap(image);
     return imageView;
