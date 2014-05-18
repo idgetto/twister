@@ -88,11 +88,14 @@ public class BoardView extends GridView {
               for (int pointerId : ids) {
 
                 // this should never happen, but just to be safe
-                if (!pointerLocs.containsKey(pointerId)) continue;
+                if (!pointerLocs.containsKey(pointerId)) {
+                  System.out.println("ERROR: no history for pointer " + pointerId);
+                  continue;
+                }
 
                 PointerCoords startLoc = pointerLocs.get(pointerId);
                 PointerCoords endLoc = new PointerCoords();
-                event.getPointerCoords(event.findPointerIndex(pid), endLoc);
+                event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
 
                 if (!hasMovedCircles(startLoc, endLoc)) continue;
 
@@ -100,7 +103,8 @@ public class BoardView extends GridView {
                 pointerLocs.put(pointerId, endLoc);
 
                 int startCircleIndex = getCircleIndex(startLoc);
-                int endCircleIndex = getCircleIndex(startLoc);
+                int endCircleIndex = getCircleIndex(endLoc);
+
                 TCircle startCircle = circles[startCircleIndex];
                 TCircle endCircle = circles[endCircleIndex];
 
