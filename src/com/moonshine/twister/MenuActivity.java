@@ -20,7 +20,7 @@ public class MenuActivity extends Activity {
     DisplayMetrics metrics = getResources().getDisplayMetrics();
     int width = metrics.widthPixels;
     int height = metrics.heightPixels;
-    int rows = BoardView.ROWS + MoveView.ROWS + 2;
+    int rows = BoardView.ROWS + MoveView.ROWS;
     int cols = BoardView.COLS;
     TCircle.setSize(Math.min(width / cols, height / rows));
 

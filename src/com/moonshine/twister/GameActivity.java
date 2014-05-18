@@ -1,10 +1,9 @@
 package com.moonshine.twister;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.app.Activity;
 import android.widget.TextView;
-import android.view.MenuItem;
+import android.content.Intent;
 import android.os.Vibrator;
 
 public class GameActivity extends Activity {
@@ -13,7 +12,6 @@ public class GameActivity extends Activity {
 
   private BoardView boardView;
   private MoveView moveView;
-  private TextView textView;
 
   private TPlayer currentPlayer;
   private TPlayer playerOne;
@@ -27,7 +25,6 @@ public class GameActivity extends Activity {
 
       boardView = (BoardView) findViewById(R.id.board_view);
       moveView  = (MoveView) findViewById(R.id.move_view);
-      textView  = (TextView) findViewById(R.id.text_view);
 
       playerOne = new TPlayer();
       // playerTwo = new TPlayer();
@@ -40,8 +37,6 @@ public class GameActivity extends Activity {
 
       // needs --> does the newest instruction call for this circle
       if (!currentPlayer.using(index) && moveView.needs(circle) && !isFinishing()) {
-        textView.setText("Success! Index: " + index);
-
         Finger finger = moveView.nextFinger();
         currentPlayer.press(index);
 
@@ -51,17 +46,12 @@ public class GameActivity extends Activity {
         currentPlayer.incrementScore();
 
         moveView.update();
-        textView.append("\nColor: "  + Utils.capitalize(moveView.nextColor().toString()));
-        textView.append("\nFinger: " + Utils.capitalize(moveView.nextFinger().toString()));
-
       }
     }
 
     public void onRelease(int index, TCircle circle) {
       // requries --> is this circle is still necessary
-      System.out.println("############\nJust Released\n############");
       if (moveView.requires(circle)) {
-        System.out.println("Game Over:\nreleased index: " + index + ", color: " + circle.getColor());
         gameOver();
       }
       else {
@@ -72,9 +62,6 @@ public class GameActivity extends Activity {
     }
 
     public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
-      // System.out.println("############");
-      // System.out.println("start index: " + startIndex + " end index: " + endIndex);
-      // System.out.println("############");
       if (startIndex != endIndex) {
     	  onRelease(startIndex, startCircle);
     	  onPress(endIndex, endCircle);

@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class BoardView extends GridView {
 
-  public static final int ROWS = 4;
+  public static final int ROWS = 5;
   public static final int COLS = 4;
 
   private final TCircle[] circles = new TCircle[ROWS * COLS];
@@ -97,13 +97,13 @@ public class BoardView extends GridView {
                 PointerCoords endLoc = new PointerCoords();
                 event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
 
-                if (!hasMovedCircles(startLoc, endLoc)) continue;
-
                 // update pointer location
                 pointerLocs.put(pointerId, endLoc);
 
                 int startCircleIndex = getCircleIndex(startLoc);
                 int endCircleIndex = getCircleIndex(endLoc);
+
+                if (startCircleIndex == endCircleIndex) continue;
 
                 TCircle startCircle = circles[startCircleIndex];
                 TCircle endCircle = circles[endCircleIndex];

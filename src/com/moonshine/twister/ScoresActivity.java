@@ -1,13 +1,9 @@
 package com.moonshine.twister;
 
-import android.view.LayoutInflater;
-import android.widget.TableLayout;
-import android.widget.FrameLayout;
-import android.os.Bundle;
 import android.app.Activity;
+import android.os.Bundle;
+import android.widget.TableLayout;
 import android.widget.TextView;
-import android.view.View;
-import android.content.Context;
 import android.content.Intent;
 
 public class ScoresActivity extends Activity {

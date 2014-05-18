@@ -18,15 +18,6 @@
       android:layout_height="wrap_content"
       android:stretchMode="columnWidth"
       android:gravity="center"
-      android:numColumns="4" >
-
-  </com.moonshine.twister.BoardView>
-
-  <TextView
-      android:id="@+id/text_view"
-      android:layout_width="fill_parent"
-      android:layout_height="0dp"
-      android:layout_weight="1" >
-  </TextView>
+      android:numColumns="4" />
 
 </LinearLayout>
