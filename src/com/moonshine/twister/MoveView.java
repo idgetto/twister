@@ -64,7 +64,8 @@ public class MoveView extends GridView {
   }
 
   public void update() {
-    // next.fade();
+	if (next != null)
+		next.fade();
 
     int index = (int) (Math.random() * circles.length);
 
@@ -84,6 +85,7 @@ public class MoveView extends GridView {
 
     // refreshes the gridView
     invalidateViews();
+    next.glow();
   }
 
   // does the newest instruction call for the selected circle

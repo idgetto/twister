@@ -13,10 +13,10 @@ public class TCircle {
                                       };
 
   private static final int[] glowImages = {
-                                            // R.drawable.green_glow_circle,
-                                            // R.drawable.yellow_glow_circle,
-                                            // R.drawable.blue_glow_circle,
-                                            // R.drawable.red_glow_circle
+                                             R.drawable.green_glow_circle,
+                                             R.drawable.yellow_glow_circle,
+                                             R.drawable.blue_glow_circle,
+                                             R.drawable.red_glow_circle
                                           };
 
   private TColor color;
