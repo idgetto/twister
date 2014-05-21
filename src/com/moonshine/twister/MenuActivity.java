@@ -27,22 +27,18 @@ public class MenuActivity extends Activity {
   }
 
   public void onePlayer(View view) {
-	  startGame(true);
+	Intent gameIntent = new Intent(this, OnePlayerGame.class);
+    	startActivity(gameIntent);
   }
 
   public void twoPlayer(View view) {
-	  startGame(false);
+	Intent gameIntent = new Intent(this, TwoPlayerGame.class);
+    	startActivity(gameIntent);
   }
 
   public void scores(View view) {
-	  Intent scoresIntent = new Intent(this, ScoresActivity.class);
-	  startActivity(scoresIntent);
-  }
-
-  private void startGame(boolean single) {
-    Intent gameIntent = new Intent(this, GameActivity.class);
-    gameIntent.putExtra("single", single);
-    startActivity(gameIntent);
+	Intent scoresIntent = new Intent(this, ScoresActivity.class);
+	startActivity(scoresIntent);
   }
 
 }
