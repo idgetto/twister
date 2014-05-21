@@ -105,8 +105,15 @@ public class BoardView extends GridView {
 
                 if (startCircleIndex == endCircleIndex) continue;
 
-                TCircle startCircle = circles[startCircleIndex];
-                TCircle endCircle = circles[endCircleIndex];
+                if (startCircleIndex != -1)
+                  TCircle startCircle = circles[startCircleIndex];
+                else
+                  TCircle startCircle = null;
+
+                if (endCircleIndex != -1)
+                  TCircle endCircle = circles[endCircleIndex];
+                else
+                  TCircle endCircle = null;
 
                 gameActivity.onMove(startCircleIndex, endCircleIndex, startCircle, endCircle);
               }

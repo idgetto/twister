@@ -20,13 +20,13 @@ public class ScoresActivity extends Activity {
     TextView tv = (TextView) findViewById(R.id.text_view);
 
     Intent intent = getIntent();
-    int p1Score = intent.getIntExtra("p1score", -1);
-    int p2Score = intent.getIntExtra("p2score", -1);
+    int p1Score = intent.getIntExtra("p1Score", -1);
+    int p2Score = intent.getIntExtra("p2Score", -1);
 
     if (p1Score != -1)
       tv.setText("P1 score: " + p1Score);
     if (p2Score != -1)
-      tv.append("P2 score: " + p2Score);
+      tv.append("\nP2 score: " + p2Score);
     // TreeMap<String, Integer> scores = SharedPreferences.getAll();
     // for (Map.Entry<String, Integer> score : scores) {
   }

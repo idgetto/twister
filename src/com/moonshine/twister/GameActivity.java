@@ -13,20 +13,24 @@ public abstract class GameActivity extends Activity {
   protected TPlayer currentPlayer;
 
   /** Called when the activity is first created. */
-    @Override
-    public abstract void onCreate(Bundle savedInstanceState);
+  @Override
+  public void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+  }
 
-    public void onPress(int index, TCircle circle) {
-			
+  public void onPress(int index, TCircle circle) {
     if (isFinishing()) return;
 
     // needs --> does the newest instruction call for this circle
-    if (!currentPlayer.using(index) && currentPlayer.moveView.needs(circle)) {
-      Finger finger = currentPlayer.moveView.nextFinger();
+    MoveView moveView = currentPlayer.moveView;
+    if (!currentPlayer.using(index) && moveView.needs(circle)) {
+      Finger finger = moveView.nextFinger();
       currentPlayer.press(index);
 
       circle.setPlayer(currentPlayer);
       circle.setFinger(finger);
+      moveView.fade();
+      moveView.refresh();
 
       endMove();
     }
@@ -63,7 +67,7 @@ public abstract class GameActivity extends Activity {
 
     startScores();
   }
-	
+
 	protected void update() {
 		currentPlayer.moveView.update();
 	}

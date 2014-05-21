@@ -64,9 +64,6 @@ public class MoveView extends GridView {
   }
 
   public void update() {
-	if (next != null)
-		next.fade();
-
     int index = (int) (Math.random() * circles.length);
 
     TColor color = TColor.random();
@@ -82,10 +79,9 @@ public class MoveView extends GridView {
     }
 
     next = circles[index];
-
-    // refreshes the gridView
-    invalidateViews();
     next.glow();
+
+    refresh();
   }
 
   // does the newest instruction call for the selected circle
@@ -109,6 +105,14 @@ public class MoveView extends GridView {
       return false;
 
     return circle.getColor() == required.getColor();
+  }
+
+  public void fade() {
+    next.fade();
+  }
+
+  public void refresh() {
+    invalidateViews();
   }
 
 }
