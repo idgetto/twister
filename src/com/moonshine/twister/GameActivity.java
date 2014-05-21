@@ -6,52 +6,37 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.os.Vibrator;
 
-public class GameActivity extends Activity {
+public abstract class GameActivity extends Activity {
 
   private static final long VIBRATE_TIME = 650;
 
-  private BoardView boardView;
-  private MoveView moveView;
-
   private TPlayer currentPlayer;
-  private TPlayer playerOne;
-  // private TPlayer playerTwo;
 
   /** Called when the activity is first created. */
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-      super.onCreate(savedInstanceState);
-      setContentView(R.layout.game_activity);
-
-      boardView = (BoardView) findViewById(R.id.board_view);
-      moveView  = (MoveView) findViewById(R.id.move_view);
-
-      playerOne = new TPlayer();
-      // playerTwo = new TPlayer();
-      currentPlayer = playerOne;
-
-      moveView.update();
-    }
+    public abstract void onCreate(Bundle savedInstanceState);
 
     public void onPress(int index, TCircle circle) {
+			
+			if (isFinishing()) return;
 
       // needs --> does the newest instruction call for this circle
-      if (!currentPlayer.using(index) && moveView.needs(circle) && !isFinishing()) {
-        Finger finger = moveView.nextFinger();
+      if (!currentPlayer.using(index) && currentPlayer.moveView.needs(circle)) {
+        Finger finger = currentPlayer.moveView.nextFinger();
         currentPlayer.press(index);
 
         circle.setPlayer(currentPlayer);
         circle.setFinger(finger);
 
         currentPlayer.incrementScore();
-
-        moveView.update();
+				changePlayer();
+        currentPlayer.moveView.update();
       }
     }
 
     public void onRelease(int index, TCircle circle) {
       // requries --> is this circle is still necessary
-      if (moveView.requires(circle)) {
+      if (circle.getPlayer().moveView.requires(circle)) {
         gameOver();
       }
       else {
@@ -70,22 +55,19 @@ public class GameActivity extends Activity {
 
 
     private void gameOver() {
-      if (!isFinishing()) {
-        finish();
+      if (isFinishing()) return;
+      finish();
 
-        Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        if (vibrator != null) {
-          vibrator.vibrate(VIBRATE_TIME);
-        }
+      Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+      if (vibrator != null) {
+        vibrator.vibrate(VIBRATE_TIME);
+      }
 
-       	Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
-       	scoreIntent.putExtra("p1score", playerOne.getScore());
-       	startActivity(scoreIntent);
-       }
+     	// Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
+//      	scoreIntent.putExtra("p1score", playerOne.getScore());
+//      	startActivity(scoreIntent);
     }
 
-  // private void changePlayer() {
-  //   currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
-  // }
+  private abstract void changePlayer();
 
 }
