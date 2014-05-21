@@ -10,7 +10,7 @@ public abstract class GameActivity extends Activity {
 
   private static final long VIBRATE_TIME = 650;
 
-  private TPlayer currentPlayer;
+  protected TPlayer currentPlayer;
 
   /** Called when the activity is first created. */
     @Override
@@ -18,7 +18,7 @@ public abstract class GameActivity extends Activity {
 
     public void onPress(int index, TCircle circle) {
 			
-			if (isFinishing()) return;
+      if (isFinishing()) return;
 
       // needs --> does the newest instruction call for this circle
       if (!currentPlayer.using(index) && currentPlayer.moveView.needs(circle)) {
@@ -63,11 +63,11 @@ public abstract class GameActivity extends Activity {
         vibrator.vibrate(VIBRATE_TIME);
       }
 
-     	// Intent scoreIntent = new Intent(getApplicationContext(), ScoresActivity.class);
-//      	scoreIntent.putExtra("p1score", playerOne.getScore());
-//      	startActivity(scoreIntent);
+      startScores();
     }
 
   private abstract void changePlayer();
+  
+  private abstract void startScores();
 
 }
