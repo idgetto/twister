@@ -8,8 +8,6 @@ import android.util.DisplayMetrics;
 
 public class MenuActivity extends Activity {
 
-	private static final int GAME_ACTIVITY = 1;
-
   /** Called when the activity is first created. */
   @Override
   public void onCreate(Bundle savedInstanceState) {
@@ -27,18 +25,18 @@ public class MenuActivity extends Activity {
   }
 
   public void onePlayer(View view) {
-	Intent gameIntent = new Intent(this, OnePlayerGame.class);
-    	startActivity(gameIntent);
+		Intent gameIntent = new Intent(this, OnePlayerGame.class);
+    startActivity(gameIntent);
   }
 
   public void twoPlayer(View view) {
-	Intent gameIntent = new Intent(this, TwoPlayerGame.class);
-    	startActivity(gameIntent);
+		Intent gameIntent = new Intent(this, TwoPlayerGame.class);
+    startActivity(gameIntent);
   }
 
   public void scores(View view) {
-	Intent scoresIntent = new Intent(this, ScoresActivity.class);
-	startActivity(scoresIntent);
+		Intent scoresIntent = new Intent(this, ScoresActivity.class);
+		startActivity(scoresIntent);
   }
 
 }
