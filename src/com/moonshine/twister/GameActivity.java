@@ -18,56 +18,58 @@ public abstract class GameActivity extends Activity {
 
     public void onPress(int index, TCircle circle) {
 			
-      if (isFinishing()) return;
+    if (isFinishing()) return;
 
-      // needs --> does the newest instruction call for this circle
-      if (!currentPlayer.using(index) && currentPlayer.moveView.needs(circle)) {
-        Finger finger = currentPlayer.moveView.nextFinger();
-        currentPlayer.press(index);
+    // needs --> does the newest instruction call for this circle
+    if (!currentPlayer.using(index) && currentPlayer.moveView.needs(circle)) {
+      Finger finger = currentPlayer.moveView.nextFinger();
+      currentPlayer.press(index);
 
-        circle.setPlayer(currentPlayer);
-        circle.setFinger(finger);
+      circle.setPlayer(currentPlayer);
+      circle.setFinger(finger);
 
-        currentPlayer.incrementScore();
-				changePlayer();
-        currentPlayer.moveView.update();
-      }
+      endMove();
+    }
+  }
+
+  public void onRelease(int index, TCircle circle) {
+    // requries --> is this circle is still necessary
+    if (circle.getPlayer().moveView.requires(circle)) {
+      gameOver();
+    }
+    else {
+      currentPlayer.release(index);
+      circle.setPlayer(null);
+      circle.setFinger(Finger.NONE);
+    }
+  }
+
+  public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
+    if (startIndex != endIndex) {
+  	  onRelease(startIndex, startCircle);
+  	  onPress(endIndex, endCircle);
+    }
+  }
+
+
+  private void gameOver() {
+    if (isFinishing()) return;
+    finish();
+
+    Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
+    if (vibrator != null) {
+      vibrator.vibrate(VIBRATE_TIME);
     }
 
-    public void onRelease(int index, TCircle circle) {
-      // requries --> is this circle is still necessary
-      if (circle.getPlayer().moveView.requires(circle)) {
-        gameOver();
-      }
-      else {
-        currentPlayer.release(index);
-        circle.setPlayer(null);
-        circle.setFinger(Finger.NONE);
-      }
-    }
+    startScores();
+  }
+	
+	protected void update() {
+		currentPlayer.moveView.update();
+	}
 
-    public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
-      if (startIndex != endIndex) {
-    	  onRelease(startIndex, startCircle);
-    	  onPress(endIndex, endCircle);
-      }
-    }
+	protected abstract void endMove();
 
-
-    private void gameOver() {
-      if (isFinishing()) return;
-      finish();
-
-      Vibrator vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-      if (vibrator != null) {
-        vibrator.vibrate(VIBRATE_TIME);
-      }
-
-      startScores();
-    }
-
-  private abstract void changePlayer();
-  
-  private abstract void startScores();
+	protected abstract void startScores();
 
 }
