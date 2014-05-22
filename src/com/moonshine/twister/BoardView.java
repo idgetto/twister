@@ -54,18 +54,13 @@ public class BoardView extends GridView {
 
           TCircle circle = (TCircle) getItemAtPosition(circleIndex);
 
-          PointerCoords coord;
           switch (event.getActionMasked()) {
 
             case ACTION_DOWN:
             case ACTION_POINTER_DOWN:
 
-              // get touch location for this pointer
-              coord = new PointerCoords();
-              event.getPointerCoords(event.findPointerIndex(pid), coord);
-
               // save the location of this pointer
-              pointerLocs.put(pid, getCircleIndex(coord));
+              pointerLocs.put(pid, getPointerPosition(event, pid));
 
               gameActivity.onPress(circleIndex, circle);
               break;
@@ -80,16 +75,12 @@ public class BoardView extends GridView {
               break;
 
             case ACTION_MOVE:
-
-              System.out.println("############### MOVED ###############");
-
               // ACTION_MOVE can detect movements of all pointers,
               // but it doesn't know which pointer caused the event.
               // So we must do this for all pointers
-              ArrayList<Integer> ids = getPointerIds(event);
-              for (int pointerId : ids) {
+              for (int pointerId : getPointerIds(event)) {
                 int startCircleIndex = pointerLocs.get(pointerId);
-                int endCircleIndex = getCircleIndex(getCoords(pointerId, event));
+                int endCircleIndex = getPointerPosition(event, pointerId);
 
                 if (startCircleIndex == endCircleIndex) continue;
 
@@ -137,22 +128,6 @@ public class BoardView extends GridView {
     int x = (int) event.getX(event.findPointerIndex(pointerId));
     int y = (int) event.getY(event.findPointerIndex(pointerId));
     return pointToPosition(x, y);
-  }
-
-  private boolean hasMovedCircles(PointerCoords start, PointerCoords end) {
-    int startIndex = getCircleIndex(start);
-    int endIndex = getCircleIndex(end);
-    return start != end;
-  }
-
-  private PointerCoords getCoords(int pointerId, MotionEvent event) {
-    PointerCoords endLoc = new PointerCoords();
-    event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
-    return endLoc;
-  }
-
-  private int getCircleIndex(PointerCoords coord) {
-    return pointToPosition((int) coord.x, (int) coord.y);
   }
 
 }
