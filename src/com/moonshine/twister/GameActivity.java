@@ -22,10 +22,10 @@ public abstract class GameActivity extends Activity {
     if (circle == null || isFinishing()) return;
 
     // needs --> does the newest instruction call for this circle
-    MoveView moveView = currentPlayer.getMoveView();
-    if (!currentPlayer.using(index) && moveView.needs(circle)) {
-      Finger finger = moveView.nextFinger();
-      currentPlayer.press(index);
+    MoveView moveView = currentPlayer.getMoveView();   
+    Finger finger = moveView.nextFinger();
+    if (!currentPlayer.using(finger, index) && moveView.needs(circle)) {
+      currentPlayer.press(finger, index);
 
       circle.setPlayer(currentPlayer);
       circle.setFinger(finger);

@@ -1,14 +1,18 @@
 package com.moonshine.twister;
 
 import android.content.Context;
+import android.provider.ContactsContract.CommonDataKinds.Event;
 import android.util.AttributeSet;
 import android.widget.GridView;
 import static android.view.MotionEvent.*;
 import android.view.MotionEvent;
 import android.view.View.OnTouchListener;
 import android.view.View;
+
 import java.util.HashMap;
+
 import android.view.MotionEvent.PointerCoords;
+
 import java.util.ArrayList;
 
 public class BoardView extends GridView {
@@ -45,6 +49,7 @@ public class BoardView extends GridView {
     setOnTouchListener(new OnTouchListener() {
 
         public boolean onTouch(View view, MotionEvent event) {
+        	System.out.println("qqq " + event.getPointerCount());
 
           int pid = event.getPointerId(event.getActionIndex());
           int circleIndex = getPointerPosition(event, pid);

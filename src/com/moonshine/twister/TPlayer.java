@@ -1,18 +1,19 @@
 package com.moonshine.twister;
 
+import java.util.HashMap;
 import java.util.HashSet;
 
 public class TPlayer {
 
+  private HashMap<Finger, Integer> map;
   private HashSet<Integer> pressed;
 	public MoveView moveView;
-  private int last;
 	private int score;
 
 	public TPlayer(MoveView moveView) {
+    map = new HashMap<Finger, Integer>();
     pressed = new HashSet<Integer>();
 		this.moveView = moveView;
-    last = -1;
     score = 0;
 	}
 
@@ -32,17 +33,19 @@ public class TPlayer {
     return moveView;
   }
 
-  public boolean using(int index) {
-    return (last == index || pressed.contains(index));
+  public boolean using(Finger finger, int index) {
+	  if (map.get(finger) == index)
+		  return true;
+    return pressed.contains(index);
   }
 
-  public void press(int index) {
-    last = index;
+  public void press(Finger finger, int index) {
+    map.put(finger, index);
     pressed.add(index);
   }
-
+  
   public void release(int index) {
-    pressed.remove(index);
+	  pressed.remove(index);
   }
 
 }
