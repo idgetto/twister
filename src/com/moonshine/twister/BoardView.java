@@ -50,7 +50,7 @@ public class BoardView extends GridView {
           int circleIndex = getPointerPosition(event, pid);
 
           // touch is outside the view
-          if (circleIndex == -1) return true;
+          // if (circleIndex == -1) return true;
 
           TCircle circle = (TCircle) getItemAtPosition(circleIndex);
 
