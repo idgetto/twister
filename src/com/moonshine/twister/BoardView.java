@@ -49,7 +49,7 @@ public class BoardView extends GridView {
     setOnTouchListener(new OnTouchListener() {
 
         public boolean onTouch(View view, MotionEvent event) {
-        	System.out.println("qqq " + event.getPointerCount());
+        	// System.out.println("qqq " + event.getPointerCount());
 
           int pid = event.getPointerId(event.getActionIndex());
           int circleIndex = getPointerPosition(event, pid);

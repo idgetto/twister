@@ -66,9 +66,7 @@ public class MoveView extends GridView {
   public void update() {
     int index = (int) (Math.random() * circles.length);
 
-//    TColor color = TColor.random();
-    System.out.println("New Circle");
-    TColor color = TColor.GREEN;
+    TColor color = TColor.random();
     Finger finger = Finger.get(index);
 
     if (circles[index] == null) {
@@ -79,6 +77,9 @@ public class MoveView extends GridView {
       circle.setColor(color);
       circle.setFinger(finger);
     }
+
+    System.out.println("######## Next move ########");
+    System.out.println("Finger: " + finger + ", Color: " + color);
 
     next = circles[index];
     next.glow();

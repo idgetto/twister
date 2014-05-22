@@ -5,13 +5,13 @@ import java.util.HashSet;
 
 public class TPlayer {
 
-  private HashMap<Finger, Integer> map;
+  private HashMap<Finger, Integer> lastPressed;
   private HashSet<Integer> pressed;
 	public MoveView moveView;
 	private int score;
 
 	public TPlayer(MoveView moveView) {
-    map = new HashMap<Finger, Integer>();
+    lastPressed = new HashMap<Finger, Integer>();
     pressed = new HashSet<Integer>();
 		this.moveView = moveView;
     score = 0;
@@ -34,16 +34,16 @@ public class TPlayer {
   }
 
   public boolean using(Finger finger, int index) {
-	  if (map.get(finger) == index)
+	  if (lastPressed.containsKey(finger) && lastPressed.get(finger) == index)
 		  return true;
     return pressed.contains(index);
   }
 
   public void press(Finger finger, int index) {
-    map.put(finger, index);
+    lastPressed.put(finger, index);
     pressed.add(index);
   }
-  
+
   public void release(int index) {
 	  pressed.remove(index);
   }
