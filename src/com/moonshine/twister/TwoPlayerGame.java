@@ -33,10 +33,10 @@ public class TwoPlayerGame extends GameActivity {
 
 	protected void startScores(TPlayer loser) {
 		Intent scoresIntent = new Intent(this, ScoresActivity.class);
-		scoresIntent.putExtra("p1Score", playerOne.getScore());
-		scoresIntent.putExtra("p2Score", playerTwo.getScore());
+		scoresIntent.putExtra(EXTRA_P1_SCORE, playerOne.getScore());
+		scoresIntent.putExtra(EXTRA_P2_SCORE, playerTwo.getScore());
 		String winnerName = (loser == playerOne) ? "Player Two" : "Player One";
-		scoresIntent.putExtra("result", winnerName);
+		scoresIntent.putExtra(EXTRA_WINNER, winnerName);
 		startActivity(scoresIntent);
 	}
 

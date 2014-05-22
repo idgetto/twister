@@ -25,7 +25,7 @@ public class OnePlayerGame extends GameActivity {
 
 	protected void startScores(TPlayer loser) {
 		Intent scoresIntent = new Intent(this, ScoresActivity.class);
-		scoresIntent.putExtra("p1Score", currentPlayer.getScore());
+		scoresIntent.putExtra(EXTRA_P1_SCORE, currentPlayer.getScore());
 		startActivity(scoresIntent);
 	}
 

@@ -6,7 +6,7 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.os.Vibrator;
 
-public abstract class GameActivity extends Activity {
+public abstract class GameActivity extends BaseActivity {
 
   private static final long VIBRATE_TIME = 650;
 
@@ -22,7 +22,7 @@ public abstract class GameActivity extends Activity {
     if (circle == null || isFinishing()) return;
 
     // needs --> does the newest instruction call for this circle
-    MoveView moveView = currentPlayer.getMoveView();   
+    MoveView moveView = currentPlayer.getMoveView();
     Finger finger = moveView.nextFinger();
     if (!currentPlayer.using(finger, index) && moveView.needs(circle)) {
       currentPlayer.press(finger, index);
@@ -36,8 +36,8 @@ public abstract class GameActivity extends Activity {
   }
 
   public void onRelease(int index, TCircle circle) {
-    if (circle == null || isFinishing()) return; 
-    
+    if (circle == null || isFinishing()) return;
+
     // requries --> is this circle is still necessary
     System.out.println("Released index: " + index);
     if (circle.required()) {
