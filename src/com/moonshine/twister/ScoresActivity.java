@@ -17,16 +17,25 @@ public class ScoresActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.scores_activity);
 
-    TextView tv = (TextView) findViewById(R.id.text_view);
+    TextView rView = (TextView) findViewById(R.id.result_view);
+    TextView sView = (TextView) findViewById(R.id.score_view);
 
     Intent intent = getIntent();
     int p1Score = intent.getIntExtra("p1Score", -1);
     int p2Score = intent.getIntExtra("p2Score", -1);
+    String result = intent.getStringExtra("result");
+    
+    if (result == null && p1Score != -1)
+    	rView.setText("Game Over!");
+    else if (result != null)
+    	rView.setText(result + " Wins!");
+    else
+    	rView.setText("High Scores");
 
     if (p1Score != -1)
-      tv.setText("P1 score: " + p1Score);
+    	sView.setText("P1 score: " + p1Score);
     if (p2Score != -1)
-      tv.append("\nP2 score: " + p2Score);
+    	sView.append("\nP2 score: " + p2Score);
     // TreeMap<String, Integer> scores = SharedPreferences.getAll();
     // for (Map.Entry<String, Integer> score : scores) {
   }

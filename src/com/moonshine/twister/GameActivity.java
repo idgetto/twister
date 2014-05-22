@@ -41,7 +41,7 @@ public abstract class GameActivity extends Activity {
     // requries --> is this circle is still necessary
     System.out.println("Released index: " + index);
     if (circle.required()) {
-      gameOver();
+      gameOver(circle.getPlayer());
     }
     else {
       currentPlayer.release(index);
@@ -50,7 +50,7 @@ public abstract class GameActivity extends Activity {
     }
   }
 
-  private void gameOver() {
+  private void gameOver(TPlayer loser) {
     if (isFinishing()) return;
     finish();
 
@@ -59,7 +59,7 @@ public abstract class GameActivity extends Activity {
       vibrator.vibrate(VIBRATE_TIME);
     }
 
-    startScores();
+    startScores(loser);
   }
 
 	protected void update() {
@@ -68,6 +68,6 @@ public abstract class GameActivity extends Activity {
 
 	protected abstract void endMove();
 
-	protected abstract void startScores();
+	protected abstract void startScores(TPlayer loser);
 
 }

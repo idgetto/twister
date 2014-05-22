@@ -7,9 +7,23 @@
     >
 
   <TextView
-      android:layout_width="fill_parent"
+      android:id="@+id/result_view"
+      android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:text="Hello World, ScoresActivity"
-      android:id="@+id/text_view" />
+      android:layout_below="@+id/text_view"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="29dp"
+      android:text=""
+      android:textAppearance="?android:attr/textAppearanceLarge" />
+
+  <TextView
+      android:id="@+id/score_view"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_below="@+id/result_view"
+      android:layout_centerHorizontal="true"
+      android:layout_marginTop="31dp"
+      android:text=""
+      android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

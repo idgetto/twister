@@ -31,10 +31,12 @@ public class TwoPlayerGame extends GameActivity {
 		update();
 	}
 
-	protected void startScores() {
+	protected void startScores(TPlayer loser) {
 		Intent scoresIntent = new Intent(this, ScoresActivity.class);
 		scoresIntent.putExtra("p1Score", playerOne.getScore());
 		scoresIntent.putExtra("p2Score", playerTwo.getScore());
+		String winnerName = (loser == playerOne) ? "Player Two" : "Player One";
+		scoresIntent.putExtra("result", winnerName);
 		startActivity(scoresIntent);
 	}
 
