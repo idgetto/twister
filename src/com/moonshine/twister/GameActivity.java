@@ -36,6 +36,8 @@ public abstract class GameActivity extends Activity {
   }
 
   public void onRelease(int index, TCircle circle) {
+    if (circle == null || isFinishing()) return; 
+    
     // requries --> is this circle is still necessary
     System.out.println("Released index: " + index);
     if (circle.required()) {
