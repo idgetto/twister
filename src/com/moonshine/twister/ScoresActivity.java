@@ -5,11 +5,21 @@ import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.content.Intent;
+import java.util.TreeSet;
+import android.content.SharedPreferences;
+import java.util.Collection;
+import java.util.TreeMap;
+import java.util.Map;
 
-public class ScoresActivity extends Activity {
+public class ScoresActivity extends BaseActivity {
 
-  private TableLayout table;
-  private boolean singlePlayer;
+  private static final String GAME_OVER = "Game Over!";
+  private static final String HIGH_SCORES = "High Scores";
+  private static final String DATA = "com.moonshine.twister.DATA";
+  private static final int SCORE_LENGTH = 5;
+
+  private TextView resultView;
+  private TextView scoreView;
 
   /** Called when the activity is first created. */
   @Override
@@ -17,27 +27,80 @@ public class ScoresActivity extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.scores_activity);
 
-    TextView rView = (TextView) findViewById(R.id.result_view);
-    TextView sView = (TextView) findViewById(R.id.score_view);
+    resultView = (TextView) findViewById(R.id.result_view);
+    scoreView = (TextView) findViewById(R.id.score_view);
 
     Intent intent = getIntent();
-    int p1Score = intent.getIntExtra("p1Score", -1);
-    int p2Score = intent.getIntExtra("p2Score", -1);
-    String result = intent.getStringExtra("result");
-    
-    if (result == null && p1Score != -1)
-    	rView.setText("Game Over!");
-    else if (result != null)
-    	rView.setText(result + " Wins!");
-    else
-    	rView.setText("High Scores");
+    int p1Score = intent.getIntExtra(EXTRA_P1_SCORE, -1);
+    int p2Score = intent.getIntExtra(EXTRA_P2_SCORE, -1);
+    String winner = intent.getStringExtra(EXTRA_WINNER);
 
-    if (p1Score != -1)
-    	sView.setText("P1 score: " + p1Score);
-    if (p2Score != -1)
-    	sView.append("\nP2 score: " + p2Score);
-    // TreeMap<String, Integer> scores = SharedPreferences.getAll();
-    // for (Map.Entry<String, Integer> score : scores) {
+    SharedPreferences sp = getSharedPreferences(DATA, MODE_PRIVATE);
+    TreeSet<Integer> scores = getHighScores(sp);
+
+    // game ended
+    if (p1Score != -1) {
+
+      if (winner == null) {
+        resultView.setText(GAME_OVER);
+
+        scoreView.setText("P1 score: " + p1Score);
+        scores.add(p1Score);
+
+        scoreView.append("\n\n" + HIGH_SCORES + ":\n");
+        displayScores(scores);
+      }
+      else {
+        resultView.setText(winner + " Wins!");
+
+        scoreView.setText("P1 score: " + p1Score);
+        scores.add(p1Score);
+
+        scoreView.append("\nP2 score: " + p2Score);
+        scores.add(p2Score);
+
+        scoreView.append("\n\n" + HIGH_SCORES + ":\n");
+        displayScores(scores);
+      }
+
+      SharedPreferences.Editor editor = sp.edit();
+      saveScores(scores, editor);
+
+    }
+    // from main menu
+    else {
+      resultView.setText(HIGH_SCORES);
+      displayScores(scores);
+    }
+
+  }
+
+  private TreeSet<Integer> getHighScores(SharedPreferences sp) {
+    Map<String, ?> scoreMap = sp.getAll();
+    TreeSet<Integer> scores = new TreeSet<Integer>();
+    for (Object o : scoreMap.values()) {
+      scores.add((Integer) o);
+    }
+    return scores;
+  }
+
+  private void saveScores(TreeSet<Integer> scores,  SharedPreferences.Editor editor) {
+    int score = Integer.MAX_VALUE;
+    for (int i = 0; i < scores.size() && i < SCORE_LENGTH; i++) {
+      score = scores.lower(score);
+      editor.putInt("score-" + (i + 1), score);
+    }
+    editor.apply();
+  }
+
+  private void displayScores(TreeSet<Integer> scores) {
+    int score = Integer.MAX_VALUE;
+    for (int i = 0; i < scores.size() && i < SCORE_LENGTH; i++) {
+      scoreView.append("\n" + (i + 1) + ". ");
+      score = scores.lower(score);
+      String points = score == 1 ? "point" : "points";
+      scoreView.append(score + " " + points);
+    }
   }
 
 }

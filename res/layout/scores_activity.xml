@@ -13,7 +13,6 @@
       android:layout_below="@+id/text_view"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="29dp"
-      android:text=""
       android:textAppearance="?android:attr/textAppearanceLarge" />
 
   <TextView
@@ -23,7 +22,6 @@
       android:layout_below="@+id/result_view"
       android:layout_centerHorizontal="true"
       android:layout_marginTop="31dp"
-      android:text=""
       android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
