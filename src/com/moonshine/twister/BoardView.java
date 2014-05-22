@@ -88,38 +88,20 @@ public class BoardView extends GridView {
               // So we must do this for all pointers
               ArrayList<Integer> ids = getPointerIds(event);
               for (int pointerId : ids) {
-
-                // this should never happen, but just to be safe
-                if (!pointerLocs.containsKey(pointerId)) {
-                  System.out.println("ERROR: no history for pointer " + pointerId);
-                  continue;
-                }
                 int startCircleIndex = pointerLocs.get(pointerId);
+                int endCircleIndex = getCircleIndex(getCoords(pointerId, event));
 
-                PointerCoords endLoc = new PointerCoords();
-                event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
-                int endCircleIndex = getCircleIndex(endLoc);
+                if (startCircleIndex == endCircleIndex) continue;
 
                 // update pointer location
                 if (endCircleIndex != -1)
                   pointerLocs.put(pointerId, endCircleIndex);
 
-                System.out.println("End index: " + endCircleIndex);
-                if (startCircleIndex == endCircleIndex) continue;
+                TCircle startCircle = startCircleIndex != -1 ? circles[startCircleIndex] : null;
+                TCircle endCircle = endCircleIndex != -1 ? circles[endCircleIndex] : null;
 
-                TCircle startCircle;
-                if (startCircleIndex != -1)
-                  startCircle = circles[startCircleIndex];
-                else
-                  startCircle = null;
-
-                TCircle endCircle;
-                if (endCircleIndex != -1)
-                  endCircle = circles[endCircleIndex];
-                else
-                  endCircle = null;
-
-                gameActivity.onMove(startCircleIndex, endCircleIndex, startCircle, endCircle);
+                gameActivity.onRelease(startCircleIndex, startCircle);
+                gameActivity.onPress(endCircleIndex, endCircle);
               }
 
               break;
@@ -161,6 +143,12 @@ public class BoardView extends GridView {
     int startIndex = getCircleIndex(start);
     int endIndex = getCircleIndex(end);
     return start != end;
+  }
+
+  private PointerCoords getCoords(int pointerId, MotionEvent event) {
+    PointerCoords endLoc = new PointerCoords();
+    event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
+    return endLoc;
   }
 
   private int getCircleIndex(PointerCoords coord) {

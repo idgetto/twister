@@ -48,15 +48,6 @@ public abstract class GameActivity extends Activity {
     }
   }
 
-  public void onMove(int startIndex, int endIndex, TCircle startCircle, TCircle endCircle) {
-    System.out.println("Moved from " + startIndex + " to " + endIndex);
-    if (startIndex != endIndex) {
-  	  onRelease(startIndex, startCircle);
-  	  onPress(endIndex, endCircle);
-    }
-  }
-
-
   private void gameOver() {
     if (isFinishing()) return;
     finish();
