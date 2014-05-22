@@ -19,7 +19,7 @@ public class BoardView extends GridView {
   private final TCircle[] circles = new TCircle[ROWS * COLS];
   private GameActivity gameActivity;
   private Context context;
-  private HashMap<Integer, PointerCoords> pointerLocs;
+  private HashMap<Integer, Integer> pointerLocs;
 
 	public BoardView(Context context) {
     super(context);
@@ -39,7 +39,7 @@ public class BoardView extends GridView {
   private void init(Context context) {
     this.context = context;
     this.gameActivity = (GameActivity) context;
-    this.pointerLocs = new HashMap<Integer, PointerCoords>();
+    this.pointerLocs = new HashMap<Integer, Integer>();
     setAdapter(new BoardAdapter(context, this));
 
     setOnTouchListener(new OnTouchListener() {
@@ -65,7 +65,7 @@ public class BoardView extends GridView {
               event.getPointerCoords(event.findPointerIndex(pid), coord);
 
               // save the location of this pointer
-              pointerLocs.put(pid, coord);
+              pointerLocs.put(pid, getCircleIndex(coord));
 
               gameActivity.onPress(circleIndex, circle);
               break;
@@ -81,6 +81,8 @@ public class BoardView extends GridView {
 
             case ACTION_MOVE:
 
+              System.out.println("############### MOVED ###############");
+
               // ACTION_MOVE can detect movements of all pointers,
               // but it doesn't know which pointer caused the event.
               // So we must do this for all pointers
@@ -92,28 +94,30 @@ public class BoardView extends GridView {
                   System.out.println("ERROR: no history for pointer " + pointerId);
                   continue;
                 }
+                int startCircleIndex = pointerLocs.get(pointerId);
 
-                PointerCoords startLoc = pointerLocs.get(pointerId);
                 PointerCoords endLoc = new PointerCoords();
                 event.getPointerCoords(event.findPointerIndex(pointerId), endLoc);
-
-                // update pointer location
-                pointerLocs.put(pointerId, endLoc);
-
-                int startCircleIndex = getCircleIndex(startLoc);
                 int endCircleIndex = getCircleIndex(endLoc);
 
+                // update pointer location
+                if (endCircleIndex != -1)
+                  pointerLocs.put(pointerId, endCircleIndex);
+
+                System.out.println("End index: " + endCircleIndex);
                 if (startCircleIndex == endCircleIndex) continue;
 
+                TCircle startCircle;
                 if (startCircleIndex != -1)
-                  TCircle startCircle = circles[startCircleIndex];
+                  startCircle = circles[startCircleIndex];
                 else
-                  TCircle startCircle = null;
+                  startCircle = null;
 
+                TCircle endCircle;
                 if (endCircleIndex != -1)
-                  TCircle endCircle = circles[endCircleIndex];
+                  endCircle = circles[endCircleIndex];
                 else
-                  TCircle endCircle = null;
+                  endCircle = null;
 
                 gameActivity.onMove(startCircleIndex, endCircleIndex, startCircle, endCircle);
               }
