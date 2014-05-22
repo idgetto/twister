@@ -22,7 +22,7 @@ public abstract class GameActivity extends Activity {
     if (circle == null || isFinishing()) return;
 
     // needs --> does the newest instruction call for this circle
-    MoveView moveView = currentPlayer.moveView;
+    MoveView moveView = currentPlayer.getMoveView();
     if (!currentPlayer.using(index) && moveView.needs(circle)) {
       Finger finger = moveView.nextFinger();
       currentPlayer.press(index);
@@ -38,7 +38,7 @@ public abstract class GameActivity extends Activity {
   public void onRelease(int index, TCircle circle) {
     // requries --> is this circle is still necessary
     System.out.println("Released index: " + index);
-    if (circle.getPlayer() != null && circle.getPlayer().moveView.requires(circle)) {
+    if (circle.required()) {
       gameOver();
     }
     else {
@@ -70,7 +70,7 @@ public abstract class GameActivity extends Activity {
   }
 
 	protected void update() {
-		currentPlayer.moveView.update();
+		currentPlayer.getMoveView().update();
 	}
 
 	protected abstract void endMove();

@@ -37,6 +37,11 @@ public class TCircle {
     this.context = context;
   }
 
+  public boolean required() {
+    if (player == null) return false;
+    return player.getMoveView().requires(this);
+  }
+
   public static void setSize(int size) {
     TCircle.size = size;
   }

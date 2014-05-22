@@ -19,15 +19,19 @@ public class TPlayer {
   public int getScore() {
 	  return score;
   }
-  
+
   public void setScore(int points) {
 	  score = points;
   }
-  
+
   public void incrementScore() {
 	  score++;
   }
-	
+
+  public MoveView getMoveView() {
+    return moveView;
+  }
+
   public boolean using(int index) {
     return (last == index || pressed.contains(index));
   }
