@@ -14,7 +14,7 @@ import java.util.Map;
 public class ScoresActivity extends BaseActivity {
 
   private static final String GAME_OVER = "Game Over!";
-  private static final String HIGH_SCORES = "High Scores";  
+  private static final String HIGH_SCORES = "High Scores";
   private static final String DATA = "com.moonshine.twister.DATA";
   private static final int SCORE_LENGTH = 5;
 
@@ -57,7 +57,7 @@ public class ScoresActivity extends BaseActivity {
         scoreView.setText(PLAYER_ONE_NAME + " score: " + p1Score);
         scores.add(p1Score);
 
-        scoreView.append(PLAYER_TWO_NAME + " score: " + p2Score);
+        scoreView.append("\n" + PLAYER_TWO_NAME + " score: " + p2Score);
         scores.add(p2Score);
 
         scoreView.append("\n\n" + HIGH_SCORES + ":\n");
