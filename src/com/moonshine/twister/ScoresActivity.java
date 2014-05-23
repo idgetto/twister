@@ -1,3 +1,11 @@
+/*	
+ * ScoresActivity.java
+ * Displays scores after a game and high scores.
+ * @author: Kevin You, Isaac GettoMenuActivity
+ * Period: 4
+ * Date: 05-22-14
+ */
+
 package com.moonshine.twister;
 
 import android.app.Activity;
@@ -5,8 +13,11 @@ import android.os.Bundle;
 import android.widget.TableLayout;
 import android.widget.TextView;
 import android.content.Intent;
+
 import java.util.TreeSet;
+
 import android.content.SharedPreferences;
+
 import java.util.Collection;
 import java.util.TreeMap;
 import java.util.Map;
@@ -22,7 +33,9 @@ public class ScoresActivity extends BaseActivity {
 	private TextView resultView;
 	private TextView scoreView;
 
-	/** Called when the activity is first created. */
+	/* Called when the activity is first created, setting up the views.
+	 * @param savedInstanceState Bundle of saved instance state 
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,6 +89,10 @@ public class ScoresActivity extends BaseActivity {
 
 	}
 
+	/* Gets the high scores from a SharedPreferences
+	 * @param sp SharedPreferences that contains ints
+	 * @return High Scores as a TreeSet of scores as Integers
+	 */
 	private TreeSet<Integer> getHighScores(SharedPreferences sp) {
 		Map<String, ?> scoreMap = sp.getAll();
 		TreeSet<Integer> scores = new TreeSet<Integer>();
@@ -85,7 +102,11 @@ public class ScoresActivity extends BaseActivity {
 		return scores;
 	}
 
-	private void saveScores(TreeSet<Integer> scores,	SharedPreferences.Editor editor) {
+	/* Saves only a SCORE_LENGTH amount of scoresback to the SharedPreferences
+	 * @param scores scores that were recently updated
+	 * @param editor used to edit SharedPreferences
+	 */
+	private void saveScores(TreeSet<Integer> scores, SharedPreferences.Editor editor) {
 		int score = Integer.MAX_VALUE;
 		for (int i = 0; i < scores.size() && i < SCORE_LENGTH; i++) {
 			score = scores.lower(score);
@@ -94,6 +115,9 @@ public class ScoresActivity extends BaseActivity {
 		editor.apply();
 	}
 
+	/* Displays SCORE_LENGTH amount of scores, in descending order
+	 * @param scores scores to display as a TreeSet
+	 */
 	private void displayScores(TreeSet<Integer> scores) {
 		int score = Integer.MAX_VALUE;
 		for (int i = 0; i < scores.size() && i < SCORE_LENGTH; i++) {

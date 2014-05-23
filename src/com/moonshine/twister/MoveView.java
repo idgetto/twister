@@ -153,6 +153,8 @@ public class MoveView extends GridView {
 		return circle.getColor() == required.getColor();
 	}
 
+	/* Ends the move, reseting next
+	 */
 	public void endMove() {
 		next.fade();
 		next = null;
