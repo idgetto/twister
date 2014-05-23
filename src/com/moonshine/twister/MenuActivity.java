@@ -7,7 +7,7 @@ import android.view.Window;
 import android.content.Intent;
 import android.util.DisplayMetrics;
 
-public class MenuActivity extends Activity {
+public class MenuActivity extends BaseActivity {
 
   private int screenHeight;
   private int screenWidth;
