@@ -4,6 +4,6 @@ import android.widget.BaseAdapter;
 
 public abstract class TAdapter extends BaseAdapter {
 
-  public static final int PADDING = 8;
+	public static final int PADDING = 8;
 
 }

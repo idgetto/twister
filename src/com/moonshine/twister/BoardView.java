@@ -2,7 +2,7 @@
  * BoardView.java
  * Stores a grid of circles and interacts with the player
  * via an onTouchLIstener.
- * @author: Kevin You, Isaac Getto
+ * @author: Kevin You, Isaac GettoMenuActivity
  * Period: 4
  * Date: 05-22-14
  */
@@ -50,7 +50,7 @@ public class BoardView extends GridView {
 		init(context);
 	}
 
-	/* Creates a BoardView given an AttributeSet
+	/* Creates a BoardView given a Context, AttributeSet and style definition
 	 * @param context Context of the BoardView
 	 * @param attrs AttributeSet
 	 * @param defStyle style 
@@ -60,7 +60,8 @@ public class BoardView extends GridView {
 		init(context);
 	}
 
-	/* Initializes the BoardView contents
+	/* Initializes the BoardView contents, including BoardAdapter
+	 * and the OnTouchListener.
 	 * @param context Context of the BoardView
 	 */
 	private void init(Context context) {

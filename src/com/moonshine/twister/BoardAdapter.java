@@ -1,6 +1,6 @@
 /*	
  * BoardAdapter.java
- * Converts the grid of Circles from BoardView into a grid of images
+ * Converts the grid of Circles from BoardView into a array of images
  * and helps GameActivity interact with the grid of circles
  * @author: Kevin You, Isaac Getto
  * Period: 4
@@ -20,26 +20,26 @@ import android.graphics.Bitmap;
 public class BoardAdapter extends TAdapter {
 
 	private Context context;
-    private BoardView boardView;
-    private Resources resources;
+	private BoardView boardView;
+	private Resources resources;
 
-    /* Creates a BoardAdapter, filling the boardView's grid of circles
-     * and setting instance variables.
-     * @param context Context of the game
-     * @param boardView BoardView that is being adapted
-     */
+	/* Creates a BoardAdapter, filling the boardView's grid of circles
+	 * and setting instance variables.
+	 * @param context Context of the game
+	 * @param boardView BoardView that is being adapted
+	 */
 	public BoardAdapter(Context context, BoardView boardView) {
 		this.context = context;
 		this.boardView = boardView;
 		resources = context.getResources();
 	
-	    TCircle[] circles = boardView.getCircles();
-	    for (int i = 0; i < circles.length; i += TColor.values().length) {
-	    	circles[i]     = new TCircle(TColor.GREEN, context);
-	    	circles[i + 1] = new TCircle(TColor.YELLOW, context);
-	    	circles[i + 2] = new TCircle(TColor.BLUE, context);
-	    	circles[i + 3] = new TCircle(TColor.RED, context);
-	    }
+		TCircle[] circles = boardView.getCircles();
+		for (int i = 0; i < circles.length; i += TColor.values().length) {
+			circles[i]	 = new TCircle(TColor.GREEN, context);
+			circles[i + 1] = new TCircle(TColor.YELLOW, context);
+			circles[i + 2] = new TCircle(TColor.BLUE, context);
+			circles[i + 3] = new TCircle(TColor.RED, context);
+		}
 	}
 
 	/* Counts the number of circles
@@ -78,14 +78,14 @@ public class BoardAdapter extends TAdapter {
 			imageView.setLayoutParams(new GridView.LayoutParams(TCircle.getSize(), TCircle.getSize()));
 			imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
 			imageView.setPadding(PADDING, PADDING, PADDING, PADDING);
-	    } else {
-	    	imageView = (ImageView) convertView;
-	    }
+		} else {
+			imageView = (ImageView) convertView;
+		}
 	
 		TCircle circle = boardView.getCircle(position);
-	    Bitmap image = BitmapFactory.decodeResource(context.getResources(), circle.getImageId());
-	    imageView.setImageBitmap(image);
-	    return imageView;
+		Bitmap image = BitmapFactory.decodeResource(context.getResources(), circle.getImageId());
+		imageView.setImageBitmap(image);
+		return imageView;
 	}
 	
 }
