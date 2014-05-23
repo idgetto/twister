@@ -1,0 +1,38 @@
+[Activity]<:-[BaseActivity]
+[BaseActivity]<:-[MenuActivity]
+[MenuActivity]o- 3 [Button]
+[MenuActivity]-->[ScoresActivity]
+[MenuActivity]-->[OnePlayerGame]
+[MenuActivity]-->[TwoPlayerGame]
+
+[BaseActivity]<:-[ScoresActivity]nUGH
+[ScoresActivity]o- 1 [SharedPreferences]
+[ScoresActivity]o- 2 [TextView]
+
+[BaseActivity]<:-[GameActivity]
+[GameActivity]<:-[OnePlayerGame]
+[GameActivity]<:-[TwoPlayerGame]
+[OnePlayerGame]o-[BoardView]
+[TwoPlayerGame]o-[BoardView]
+[GridView]<:-[BoardView]
+[BoardView] o- [OnTouchListener]
+[TAdapter]<:- [BoardAdapter]
+[BoardAdapter] -o [BoardView]
+[BoardAdapter] --> [Utils]
+
+[OnePlayerGame]o- 1 [TPlayer]
+[TwoPlayerGame]o- 2 [TPlayer]
+[TCircle] o- [TColor]
+[TCircle] o- [Finger]
+[TCircle] o- [TPlayer]
+[TPlayer]o- [MoveView]
+[MoveView] o- 1..* [TCircle]
+
+[BaseAdapter] <:- [TAdapter]
+[TAdapter] <:- [MoveAdapter]
+[MoveAdapter] -o [MoveView]
+[GridView]<:-[MoveView]
+
+#spacing: 45
+#padding: 15
+#fontSize: 15
