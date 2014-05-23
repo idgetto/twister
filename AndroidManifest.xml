@@ -5,7 +5,7 @@
       android:versionName="1.0">
     <application
       android:label="@string/app_name"
-      android:icon="@drawable/spiral-icon"
+      android:icon="@drawable/spiral_icon"
       android:theme="@style/AppTheme" >
         <activity android:name="MenuActivity"
                   android:label="@string/app_name"
