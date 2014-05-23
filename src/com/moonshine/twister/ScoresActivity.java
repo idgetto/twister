@@ -14,10 +14,11 @@ import java.util.Map;
 public class ScoresActivity extends BaseActivity {
 
   private static final String GAME_OVER = "Game Over!";
-  private static final String HIGH_SCORES = "High Scores";
+  private static final String HIGH_SCORES = "High Scores";  
   private static final String DATA = "com.moonshine.twister.DATA";
   private static final int SCORE_LENGTH = 5;
 
+  // resultView displays the outcome (winner) while scoreView displays scores of each player
   private TextView resultView;
   private TextView scoreView;
 
@@ -38,13 +39,13 @@ public class ScoresActivity extends BaseActivity {
     SharedPreferences sp = getSharedPreferences(DATA, MODE_PRIVATE);
     TreeSet<Integer> scores = getHighScores(sp);
 
-    // game ended
+    // Checks if ScoreActivity was called when the game ended
     if (p1Score != -1) {
-
+      // If winner is null, the the game was single player
       if (winner == null) {
         resultView.setText(GAME_OVER);
 
-        scoreView.setText("P1 score: " + p1Score);
+        scoreView.setText(PLAYER_ONE_NAME + " score: " + p1Score);
         scores.add(p1Score);
 
         scoreView.append("\n\n" + HIGH_SCORES + ":\n");
@@ -53,10 +54,10 @@ public class ScoresActivity extends BaseActivity {
       else {
         resultView.setText(winner + " Wins!");
 
-        scoreView.setText("P1 score: " + p1Score);
+        scoreView.setText(PLAYER_ONE_NAME + " score: " + p1Score);
         scores.add(p1Score);
 
-        scoreView.append("\nP2 score: " + p2Score);
+        scoreView.append(PLAYER_TWO_NAME + " score: " + p2Score);
         scores.add(p2Score);
 
         scoreView.append("\n\n" + HIGH_SCORES + ":\n");
@@ -67,7 +68,7 @@ public class ScoresActivity extends BaseActivity {
       saveScores(scores, editor);
 
     }
-    // from main menu
+    // If from main menu
     else {
       resultView.setText(HIGH_SCORES);
       displayScores(scores);
