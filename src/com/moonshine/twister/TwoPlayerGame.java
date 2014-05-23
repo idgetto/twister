@@ -27,7 +27,7 @@ public class TwoPlayerGame extends GameActivity {
 
 	protected void endMove() {
 		currentPlayer.incrementScore();
-		currentPlayer = currentPlayer == playerOne ? playerTwo : playerOne;
+		currentPlayer = (currentPlayer == playerOne) ? playerTwo : playerOne;
 		update();
 	}
 
@@ -35,7 +35,7 @@ public class TwoPlayerGame extends GameActivity {
 		Intent scoresIntent = new Intent(this, ScoresActivity.class);
 		scoresIntent.putExtra(EXTRA_P1_SCORE, playerOne.getScore());
 		scoresIntent.putExtra(EXTRA_P2_SCORE, playerTwo.getScore());
-		String winnerName = (loser == playerOne) ? "Player Two" : "Player One";
+		String winnerName = (loser == playerOne) ? PLAYER_TWO_NAME : PLAYER_ONE_NAME;
 		scoresIntent.putExtra(EXTRA_WINNER, winnerName);
 		startActivity(scoresIntent);
 	}

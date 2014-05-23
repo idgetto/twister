@@ -20,7 +20,7 @@ public abstract class Utils {
     Canvas canvas = new Canvas(copy);
 
     Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-    paint.setColor(Color.WHITE);
+    paint.setColor(Color.BLACK);
     paint.setTextAlign(Paint.Align.CENTER);
     paint.setTextSize(textSize);
 
